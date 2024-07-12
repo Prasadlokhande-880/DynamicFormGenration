@@ -1,0 +1,90 @@
+<form [formGroup]="form" class="m-4">
+    <div *ngIf="formControlsData.controls.length > 0">
+      <ng-container *ngFor="let control of formControlsData.controls">
+        <div [ngSwitch]="control.type">
+          <div *ngSwitchCase="'String'">
+            <label>{{ control.label }}</label>
+            <p>__________ string Type Input ____________</p>
+          </div>
+
+          <div *ngSwitchCase="'Boolean'">
+            <label>{{ control.label }}</label>
+            <p>__________ string Type Boolen ____________</p>
+          </div>
+
+          <div *ngSwitchCase="'Counter'">
+            <div class="form-group my-2 col-sm-8 col-md-6 col-lg-4 col-xl-5 px-0">
+              <label>{{ control.label }}</label>
+              <p>__________ string Type counter ____________</p>
+            </div>
+          </div>
+
+          <div *ngSwitchCase="'select'">
+            <div class="form-group d-flex flex-row align-items-center">
+              <label>{{ control.label }}</label>
+              <p>__________ string Type select ____________</p>
+            </div>
+          </div>
+
+          <div *ngSwitchCase="'list'">
+            <label>{{ control.label }}</label>
+            <div formArrayName="{{ control.name }}">
+              <!-- Your list rendering logic goes here -->
+            </div>
+          </div>
+
+          <div *ngSwitchCase="'group'">
+            <div [formGroupName]="control.name" class="mt-2">
+              <label *ngIf="control.label">{{ control.label }}</label>
+              <ng-container *ngFor="let subControl of control.controls">
+                <div [ngSwitch]="subControl.type">
+                  <div *ngSwitchCase="'String'">
+                    <label>{{ subControl.label }}</label>
+                    <p>__________ string Type Input ____________</p>
+                  </div>
+
+                  <div *ngSwitchCase="'Boolean'">
+                    <label>{{ subControl.label }}</label>
+                    <p>__________ string Type Boolen ____________</p>
+                  </div>
+
+                  <div *ngSwitchCase="'Enum'">
+                    <div class="form-group d-flex flex-row align-items-center">
+                      <label>{{ subControl.label }}</label>
+                      <p>__________ string Type select ____________</p>
+                    </div>
+                  </div>
+
+                  <div *ngSwitchCase="'group'">
+                    <div [formGroupName]="subControl.name" class="mt-2">
+                      <label *ngIf="subControl.label">{{ subControl.label }}</label>
+                      <ng-container *ngFor="let innerControl of subControl.controls">
+                        <div [ngSwitch]="innerControl.type">
+                          <div *ngSwitchCase="'String'">
+                            <label>{{ innerControl.label }}</label>
+                            <p>__________ string Type Input ____________</p>
+                          </div>
+
+                          <div *ngSwitchCase="'Boolean'">
+                            <label>{{ innerControl.label }}</label>
+                            <p>__________ string Type Boolen ____________</p>
+                          </div>
+
+                          <div *ngSwitchCase="'Enum'">
+                            <div class="form-group d-flex flex-row align-items-center">
+                              <label>{{ innerControl.label }}</label>
+                              <p>__________ string Type select ____________</p>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </form>

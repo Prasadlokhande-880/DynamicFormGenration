@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'app-dynimic-form-control',
+  selector: 'dynimic-form-control',
   templateUrl: './dynimic-form-control.component.html',
   styleUrls: ['./dynimic-form-control.component.css'],
 })
@@ -126,7 +126,7 @@ export class DynimicFormControlComponent {
                       }
                   ]
               }
-          ]
+          ],
       }
 
   constructor(private fb: FormBuilder) {}
@@ -1740,14 +1740,15 @@ export class DynimicFormControlComponent {
 
     // console.log("Dynamic list remove", this.userForm.value);
 
-    console.log(
-      'getdata for the list:',
-      this.getDynamicList(
-        'account_list1/awsmonitorconf/filterconf/filterByTagServiceAS/filterTagsList0'
-      )
-    );
+  //   console.log(
+  //     'getdata for the list:',
+  //     this.getDynamicList(
+  //       'account_list1/awsmonitorconf/filterconf/filterByTagServiceAS/filterTagsList0'
+  //     )
+  //   );
 
-    console.log('getdata for the list:', this.getDynamicList('account_list1'));
+  //   console.log('getdata for the list:', this.getDynamicList('account_list1'));
+  //
   }
 
   buildForm(controls: any[], formGroup: FormGroup): void {

@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DynimicFormControlComponent } from './component/dynimic-form-control/dynimic-form-control.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DynamicUiComponent } from './component/dynamic-ui/dynamic-ui.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DynimicFormControlComponent
+    DynimicFormControlComponent,
+    DynamicUiComponent
   ],
   imports: [
     BrowserModule,
