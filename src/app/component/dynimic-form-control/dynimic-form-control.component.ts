@@ -17,117 +17,112 @@ export class DynimicFormControlComponent {
   firstInput: string = '';
 
   formJson ={
-          "type": "group",
-          "label": "Docker Host Monitoring Configuration",
-          "name": "configurationTitle",
-          "controls": [
+    "type": "group",
+    "label": "Container Filtering Configuration",
+    "name": "cntrFilters",
+    "controls": [
+      {
+        "type": "String",
+        "label": "Container Name Filter",
+        "name": "cntrNameFilter",
+        "value": "",
+        "validators": []
+      },
+      {
+        "type": "select",
+        "label": "Container Name Filter Type",
+        "name": "cntrNameFilterType",
+        "value": "",
+        "validators": []
+      },
+      {
+        "type": "Boolean",
+        "label": "Container Name Filter Type",
+        "name": "cntrNameFilterType",
+        "value": "",
+        "validators": []
+      },
+      {
+        "type": "Boolean",
+        "label": "Container Name Filter Type",
+        "name": "cntrNameFilterType",
+        "value": "",
+        "validators": []
+      },
+      {
+        "type": "group",
+        "label": "Container Filtering Configuration",
+        "name": "cntrFilters",
+        "controls": [
+          {
+            "type": "Boolean",
+            "label": "Container Name Filter Type",
+            "name": "cntrNameFilterType",
+            "value": "",
+            "validators": []
+          },
+          {
+            "type": "Boolean",
+            "label": "Container Name Filter Type",
+            "name": "cntrNameFilterType",
+            "value": "",
+            "validators": []
+          },
+          {
+            "type": "Boolean",
+            "label": "Container Name Filter Type",
+            "name": "cntrNameFilterType",
+            "value": "",
+            "validators": []
+          },
+          {
+            "type": "group",
+            "label": "Container Filtering Configuration",
+            "name": "cntrFilters",
+            "controls": [
               {
-                  "type": "list",
-                  "label": "Docker Host Details",
-                  "name": "HostsList",
-                  "controls": [
-                      {
-                          "type": "group",
-                          "label": null,
-                          "name": null,
-                          "controls": [
-                              {
-                                  "type": "Enum",
-                                  "label": "Monitoring mode",
-                                  "name": "isSwarm",
-                                  "value": "",
-                                  "validators": []
-                              },
-                              {
-                                  "type": "String",
-                                  "label": "Host Name",
-                                  "name": "hostName",
-                                  "value": "",
-                                  "validators": []
-                              },
-                              {
-                                  "type": "String",
-                                  "label": "Port Number",
-                                  "name": "portNumber",
-                                  "value": "",
-                                  "validators": []
-                              },
-                              {
-                                  "type": "Enum",
-                                  "label": "Connection Protocol",
-                                  "name": "protocol",
-                                  "value": "",
-                                  "validators": []
-                              },
-                              {
-                                  "type": "String",
-                                  "label": "Client Certificate File Path (.pfx)",
-                                  "name": "clientCertPath",
-                                  "value": "",
-                                  "validators": []
-                              },
-                              {
-                                  "type": "String",
-                                  "label": "Client Certificate Password",
-                                  "name": "clientCertPassword",
-                                  "value": "",
-                                  "validators": []
-                              },
-                              {
-                                  "type": "group",
-                                  "label": "Container Filtering Configuration",
-                                  "name": "cntrFilters",
-                                  "controls": [
-                                      {
-                                          "type": "String",
-                                          "label": "Container Name Filter",
-                                          "name": "cntrNameFilter",
-                                          "value": "",
-                                          "validators": []
-                                      },
-                                      {
-                                          "type": "Enum",
-                                          "label": "Container Name Filter Type",
-                                          "name": "cntrNameFilterType",
-                                          "value": "",
-                                          "validators": []
-                                      }
-                                  ]
-                              }
-                          ]
-                      }
-                  ]
+                "type": "Boolean",
+                "label": "Container Name Filter Type",
+                "name": "cntrNameFilterType",
+                "value": "",
+                "validators": []
               },
               {
-                  "type": "group",
-                  "label": "Administration",
-                  "name": "Administration",
-                  "controls": [
-                      {
-                          "type": "Boolean",
-                          "label": "Enable device mapping",
-                          "name": "i2dFlag",
-                          "value": "",
-                          "validators": []
-                      },
-                      {
-                          "type": "String",
-                          "label": "JAVA Home (1.8 or above)",
-                          "name": "java_home",
-                          "value": "",
-                          "validators": []
-                      },
-                      {
-                          "type": "Boolean",
-                          "label": "Enable Debug",
-                          "name": "DEBUG",
-                          "value": "",
-                          "validators": []
-                      }
-                  ]
-              }
-          ],
+                "type": "Boolean",
+                "label": "Container Name Filter Type",
+                "name": "cntrNameFilterType",
+                "value": "",
+                "validators": []
+              },
+              {
+                "type": "Boolean",
+                "label": "Container Name Filter Type",
+                "name": "cntrNameFilterType",
+                "value": "",
+                "validators": []
+              },
+              {
+                "type": "Boolean",
+                "label": "Container Name Filter Type",
+                "name": "cntrNameFilterType",
+                "value": "",
+                "validators": []
+              },
+              {
+                "type": "Boolean",
+                "label": "Container Name Filter Type",
+                "name": "cntrNameFilterType",
+                "value": "",
+                "validators": []
+              },
+              
+            ]
+          }
+        ]
       }
+    ]
+  }
+
 
   constructor(private fb: FormBuilder) {}
 
