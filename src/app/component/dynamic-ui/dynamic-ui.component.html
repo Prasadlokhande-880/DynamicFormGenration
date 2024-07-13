@@ -43,7 +43,7 @@
 
         <div *ngSwitchCase="'list'" class="border rounded m-2">
           <label>{{ control.label }}</label>
-          <button (click)="addList(control,control.name,form)">data</button>
+          <button (click)="addList(control.controls,control.name,form)">AddList</button>
           <div class="border rounded">
             <dynamic-ui [form]="form" [formControlsData]="control">
             </dynamic-ui>

@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import {
+  FormControl,
+  Validators,
+} from '@angular/forms';
 @Component({
   selector: 'dynamic-ui',
   templateUrl: './dynamic-ui.component.html',
-  styleUrls: ['./dynamic-ui.component.css']
+  styleUrls: ['./dynamic-ui.component.css'],
 })
 export class DynamicUiComponent implements OnInit {
   @Input() form!: FormGroup;
@@ -12,32 +15,55 @@ export class DynamicUiComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  take(): void {
+    console.log('this submit', this.form.value);
   }
 
-  take():void{
-    console.log("this submit",this.form.value);
-  }
-
-  getFormGroup(form:FormGroup,name:string):FormGroup{
+  getFormGroup(form: FormGroup, name: string): FormGroup {
     return form.get(name) as FormGroup;
   }
 
-  // this is the function for the addList
-
-  addList(control:any,name:string,form:FormGroup){
-    console.log("this is the controle",control);
-    console.log("this is the name",name);
-    console.log("this is the list",form.value.name);
-    const newGroup = this.fb.group({
-      name: [''],
-      rollno: [''],
-      date: ['']
-    });
-    const formArray = this.form.get(name) as FormArray;
+  addList(control: any, name: string, form: FormGroup): void {
+    const newGroup = this.fb.group({});
+    const formArray = form.get(name) as FormArray;
+    this.buildForm(control, newGroup);
     formArray.push(newGroup);
+    console.log('new group will be created',this.form.value);
+  }
 
-    console.log("new", this.form.value);
+  buildForm(controls: any[], formGroup: FormGroup): void {
+    controls.forEach((control) => {
+      if (control.type === 'group') {
+        const subgroup = this.fb.group({});
+        this.buildForm(control.controls, subgroup);
+        formGroup.addControl(control.name, subgroup);
+      } else if (control.type === 'list') {
+        const formArray = this.fb.array([]);
+        formGroup.addControl(control.name, formArray);
+      } else {
+        const validators = this.mapValidators(control.validators);
+        const formControl = new FormControl(control.value || '', validators);
+        formGroup.addControl(control.name, formControl);
+      }
+    });
+  }
 
+  mapValidators(validators: string[]): any[] {
+    const formValidators: any[] = [];
+    if (validators) {
+      validators.forEach((validator) => {
+        if (validator === 'required') {
+          formValidators.push(Validators.required);
+        } else if (validator === 'email') {
+          formValidators.push(Validators.email);
+        } else if (validator.startsWith('pattern:')) {
+          const pattern = validator.split(':')[1];
+          formValidators.push(Validators.pattern(pattern));
+        }
+      });
+    }
+    return formValidators;
   }
 }

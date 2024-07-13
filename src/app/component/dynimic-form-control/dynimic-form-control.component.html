@@ -20,9 +20,9 @@
   <button type="submit" class="btn btn-primary">Submit temp</button>
 </form>
 
-<!-- Pass the formcontrole and from group as Input  -->
 <div class="border border-4 border-dark rounded m-4 p-2">
-  <dynamic-ui [formControlsData]="formJson" [form]="userForm"></dynamic-ui>
-
-  <button type="button" (click)="submitFunction()" class="btn btn-primary m-4 p-2">Submit</button>
+  <dynamic-ui
+    [formControlsData]="formJson"
+    [form]="userForm"
+  ></dynamic-ui>
 </div>
