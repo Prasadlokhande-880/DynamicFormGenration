@@ -41,12 +41,17 @@
           </select>
         </div>
 
+        <!-- Need to add the formArrayName for this  -->
         <div *ngSwitchCase="'list'" class="border rounded m-2">
+          <div [formArrayName]="control.name">
           <label>{{ control.label }}</label>
-          <button (click)="addList(control.controls,control.name,form)">AddList</button>
+          <button (click)="addList(control.controls, control.name, form)">Add List</button>
           <div class="border rounded">
-            <dynamic-ui [form]="form" [formControlsData]="control">
+            <dynamic-ui
+            [form]="form"
+            [formControlsData]="control">
             </dynamic-ui>
+          </div>
           </div>
         </div>
 
