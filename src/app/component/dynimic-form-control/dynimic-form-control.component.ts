@@ -1,4 +1,4 @@
-import { Component ,ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import {DynamicUiComponent} from '../dynamic-ui/dynamic-ui.component';
+import { DynamicUiComponent } from '../dynamic-ui/dynamic-ui.component';
 
 @Component({
   selector: 'dynimic-form-control',
@@ -16,79 +16,116 @@ import {DynamicUiComponent} from '../dynamic-ui/dynamic-ui.component';
 export class DynimicFormControlComponent {
   userForm: any;
   firstInput: string = '';
-  @ViewChild('child', { static: false }) childComponent: DynamicUiComponent | undefined;
+  @ViewChild('child', { static: false }) childComponent:
+    | DynamicUiComponent
+    | undefined;
 
-  formJson ={
-        "type": "group",
-        "label": "Administration",
-        "name": "Administration",
-        "controls": [
+  formJson = {
+    type: 'group',
+    label: 'Administration',
+    name: 'Administration',
+    controls: [
+      {
+        type: 'Boolean',
+        label: 'Enable device mapping',
+        name: 'i2dFlag',
+        value: '',
+        validators: [],
+      },
+      {
+        type: 'String',
+        label: 'JAVA Home (1.8 or above)',
+        name: 'java_home',
+        value: '',
+        validators: [],
+      },
+      {
+        type: 'Boolean',
+        label: 'Enable Debug',
+        name: 'DEBUG',
+        value: '',
+        validators: [],
+      },
+      {
+        type: 'String',
+        label: 'Container Name Filter',
+        name: 'cntrNameFilter',
+        value: '',
+        validators: [],
+      },
+      {
+        type: 'group',
+        label: 'Administration',
+        name: 'Administration',
+        controls: [
           {
-            "type": "Boolean",
-            "label": "Enable device mapping",
-            "name": "i2dFlag",
-            "value": "",
-            "validators": []
+            type: 'Boolean',
+            label: 'Enable device mapping',
+            name: 'i2dFlag',
+            value: '',
+            validators: [],
           },
           {
-            "type": "String",
-            "label": "JAVA Home (1.8 or above)",
-            "name": "java_home",
-            "value": "",
-            "validators": []
+            type: 'String',
+            label: 'JAVA Home (1.8 or above)',
+            name: 'java_home',
+            value: '',
+            validators: [],
           },
           {
-            "type": "Boolean",
-            "label": "Enable Debug",
-            "name": "DEBUG",
-            "value": "",
-            "validators": []
+            type: 'Boolean',
+            label: 'Enable Debug',
+            name: 'DEBUG',
+            value: '',
+            validators: [],
           },
           {
-            "type": "String",
-            "label": "Container Name Filter",
-            "name": "cntrNameFilter",
-            "value": "",
-            "validators": []
+            type: 'String',
+            label: 'Container Name Filter',
+            name: 'cntrNameFilter',
+            value: '',
+            validators: [],
           },
           {
-        "type": "group",
-        "label": "Administration",
-        "name": "Administration",
-        "controls": [
-          {
-            "type": "Boolean",
-            "label": "Enable device mapping",
-            "name": "i2dFlag",
-            "value": "",
-            "validators": []
-          },
-          {
-            "type": "String",
-            "label": "JAVA Home (1.8 or above)",
-            "name": "java_home",
-            "value": "",
-            "validators": []
-          },
-          {
-            "type": "Boolean",
-            "label": "Enable Debug",
-            "name": "DEBUG",
-            "value": "",
-            "validators": []
-          },
-          {
-            "type": "String",
-            "label": "Container Name Filter",
-            "name": "cntrNameFilter",
-            "value": "",
-            "validators": []
-          },
-        ]
-}
-        ]
-}
+            type: 'list',
+            label: 'Administrationtemp',
+            name: 'Administrationtemp',
+            controls: [
+              {
+                type: 'Boolean',
+                label: 'Enable device mapping',
+                name: 'i2dFlag',
+                value: '',
+                validators: [],
+              },
+              {
+                type: 'String',
+                label: 'JAVA Home (1.8 or above)',
+                name: 'java_home',
+                value: '',
+                validators: [],
+              },
+              {
+                type: 'Boolean',
+                label: 'Enable Debug',
+                name: 'DEBUG',
+                value: '',
+                validators: [],
+              },
+              {
+                type: 'String',
 
+                label: 'Container Name Filter',
+                name: 'cntrNameFilter',
+                value: '',
+                validators: [],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  };
 
   constructor(private fb: FormBuilder) {}
 
@@ -1701,19 +1738,19 @@ export class DynimicFormControlComponent {
 
     // console.log("Dynamic list remove", this.userForm.value);
 
-  //   console.log(
-  //     'getdata for the list:',
-  //     this.getDynamicList(
-  //       'account_list1/awsmonitorconf/filterconf/filterByTagServiceAS/filterTagsList0'
-  //     )
-  //   );
+    //   console.log(
+    //     'getdata for the list:',
+    //     this.getDynamicList(
+    //       'account_list1/awsmonitorconf/filterconf/filterByTagServiceAS/filterTagsList0'
+    //     )
+    //   );
 
-  //   console.log('getdata for the list:', this.getDynamicList('account_list1'));
-  //
+    //   console.log('getdata for the list:', this.getDynamicList('account_list1'));
+    //
   }
 
-  submitFunction():void{
-    console.log("this is the valur change",this.childComponent?.form.value());
+  submitFunction(): void {
+    console.log('this is the valur change', this.childComponent?.form.value());
   }
 
   buildForm(controls: any[], formGroup: FormGroup): void {
