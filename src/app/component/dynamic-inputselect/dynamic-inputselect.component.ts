@@ -8,5 +8,5 @@ import { FormControl } from '@angular/forms';
 })
 export class DynamicInputselectComponent {
   @Input() label: string = '';
-  @Input() formControl: FormControl = new FormControl();
+  @Input() formControlName: FormControl = new FormControl();
 }

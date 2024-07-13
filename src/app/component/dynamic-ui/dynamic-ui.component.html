@@ -4,103 +4,58 @@
       <ng-container *ngFor="let control of formControlsData.controls">
         <div [ngSwitch]="control.type">
           <div *ngSwitchCase="'String'">
-            <dynamic-input-string
-            [label]="control.label">
-            </dynamic-input-string>
+            <label>{{ control.label }}</label>
+            <input
+            id="control.name"
+            type="text"
+            class="form-control"
+            />
           </div>
 
           <div *ngSwitchCase="'Boolean'">
-            Boolean
-            <dynamic-input-boolean
-            [label]="control.label"
-            ></dynamic-input-boolean>
+            <label>{{ control.label }}</label>
+            <input
+            id="control.name"
+            type="checkbox"
+            class="form-check-input"
+            />
           </div>
 
           <div *ngSwitchCase="'Counter'">
-            Counter
-            <dynamic-input-counter
-            [label]="control.label"
-            ></dynamic-input-counter>
+            <label>{{ control.label }}</label>
+            <input
+            id="control.name"
+            type="number"
+            class="form-control"
+            />
           </div>
 
           <div *ngSwitchCase="'select'">
-            select
-            <dynamic-inputselect
-            [label]="control.label"
-            ></dynamic-inputselect>
+            <label>{{ control.label }}</label>
+            <select id="control.name" class="form-control">
+              <option *ngFor="let option of control.options" [value]="option">
+                {{ option }}
+              </option>
+            </select>
           </div>
 
           <div *ngSwitchCase="'list'" class="border rounded m-2">
             <label>{{ control.label }}</label>
             <div class="border rounded">
-              <dynamic-ui
-              [form]="form"
-              [formControlsData]="control">
+              <dynamic-ui [form]="form" [formControlsData]="control">
               </dynamic-ui>
             </div>
           </div>
 
           <div *ngSwitchCase="'group'" class="border rounded m-1">
-            <label>{{ control.label }}</label>
-            <dynamic-ui
-            [form]="form"
-            [formControlsData]="control">
-            </dynamic-ui>
+            <div [formGroupName]="control.name">
+              <label>{{ control.label }}</label>
+              <dynamic-ui [form]="form" [formControlsData]="control">
+              </dynamic-ui>
+            </div>
           </div>
         </div>
       </ng-container>
     </div>
   </form>
 </div>
-
-<!-- {{<div [ngSwitch]="control.type">
-
-    <div *ngSwitchCase="'String'">
-      <label>{{ control.label }}</label>
-      <input [formControlName]="control.name" type="text" class="form-control"/>
-    </div>
-
-    <div *ngSwitchCase="'Boolean'">
-      <label>{{ control.label }}</label>
-      <input [formControlName]="control.name" type="checkbox" class="form-check-input"/>
-    </div>
-
-    <div *ngSwitchCase="'Counter'">
-      <div class="form-group my-2 col-sm-8 col-md-6 col-lg-4 col-xl-5 px-0">
-        <label>{{ control.label }}</label>
-        <input [formControlName]="control.name" type="number" class="form-control"/>
-      </div>
-    </div>
-
-    <div *ngSwitchCase="'select'">
-      <div class="form-group d-flex flex-row align-items-center">
-        <label>{{ control.label }}</label>
-        <select [formControlName]="control.name" class="form-control">
-          <option *ngFor="let option of control.options" [value]="option">{{ option }}</option>
-        </select>
-      </div>
-    </div>
-
-    <div *ngSwitchCase="'list'">
-      <p>{{ control | json }}</p>
-      <label>{{ control.label }}</label>
-      <div formArrayName="{{ control.name }}">
-          <dynamic-ui
-          [form]="form"
-          [formControlsData]="control"></dynamic-ui>
-      </div>
-    </div>
-
-    <div *ngSwitchCase="'group'">
-      <p>{{ control | json }}</p>
-       <!-- Debugging information
-      <label>{{ control.label }}</label>
-      <div>
-        <dynamic-ui
-        [form]="form"
-        [formControlsData]="control">
-      </dynamic-ui>
-      </div>
-    </div>
-
-  </div>}} -->

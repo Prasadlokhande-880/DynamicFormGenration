@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,ViewChild} from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import {DynamicUiComponent} from '../dynamic-ui/dynamic-ui.component';
 
 @Component({
   selector: 'dynimic-form-control',
@@ -15,6 +16,7 @@ import {
 export class DynimicFormControlComponent {
   userForm: any;
   firstInput: string = '';
+  @ViewChild('child', { static: false }) childComponent: DynamicUiComponent | undefined;
 
   formJson ={
     "type": "group",
@@ -1757,6 +1759,10 @@ export class DynimicFormControlComponent {
 
   //   console.log('getdata for the list:', this.getDynamicList('account_list1'));
   //
+  }
+
+  submitFunction():void{
+    console.log("this is the valur change",this.childComponent?.form.value());
   }
 
   buildForm(controls: any[], formGroup: FormGroup): void {
