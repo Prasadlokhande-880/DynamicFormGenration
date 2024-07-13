@@ -13,20 +13,13 @@ export class DynamicUiComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    console.log('form', this.form.value);
-    console.log('formControlsData', this.formControlsData);
   }
 
-  getFormArray(controlName: string): FormArray {
-    return this.form.get(controlName) as FormArray;
+  take():void{
+    console.log("this submit",this.form.value);
   }
 
-  getFormGroup(controlName: string, index: number): FormGroup {
-    return this.getFormArray(controlName).at(index) as FormGroup;
+  getFormGroup(form:FormGroup,name:string):FormGroup{
+    return form.get(name) as FormGroup;
   }
-
-  getFormGroupByName(controlName: string): FormGroup {
-    return this.form.get(controlName) as FormGroup;
-  }
-  
 }

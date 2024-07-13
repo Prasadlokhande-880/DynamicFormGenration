@@ -1,61 +1,66 @@
-<div>
-  <form [formGroup]="form" class="m-4">
-    <div *ngIf="formControlsData.controls.length > 0">
-      <ng-container *ngFor="let control of formControlsData.controls">
-        <div [ngSwitch]="control.type">
-          <div *ngSwitchCase="'String'">
-            <label>{{ control.label }}</label>
-            <input
+<div [formGroup]="form" class="m-4">
+  <div *ngIf="formControlsData.controls.length > 0">
+    <ng-container *ngFor="let control of formControlsData.controls">
+      <div [ngSwitch]="control.type">
+        <div *ngSwitchCase="'String'">
+          <label>{{ control.label }}</label>
+          <input
             id="control.name"
             type="text"
             class="form-control"
-            />
-          </div>
+            [formControlName]="control.name"
+          />
+        </div>
 
-          <div *ngSwitchCase="'Boolean'">
-            <label>{{ control.label }}</label>
-            <input
+        <div *ngSwitchCase="'Boolean'">
+          <label>{{ control.label }}</label>
+          <input
             id="control.name"
             type="checkbox"
             class="form-check-input"
-            />
-          </div>
+            [formControlName]="control.name"
+          />
+        </div>
 
-          <div *ngSwitchCase="'Counter'">
-            <label>{{ control.label }}</label>
-            <input
+        <div *ngSwitchCase="'Counter'">
+          <label>{{ control.label }}</label>
+          <input
             id="control.name"
             type="number"
             class="form-control"
-            />
-          </div>
+            [formControlName]="control.name"
+          />
+        </div>
 
-          <div *ngSwitchCase="'select'">
-            <label>{{ control.label }}</label>
-            <select id="control.name" class="form-control">
-              <option *ngFor="let option of control.options" [value]="option">
-                {{ option }}
-              </option>
-            </select>
-          </div>
+        <div *ngSwitchCase="'select'">
+          <label>{{ control.label }}</label>
+          <select id="control.name" class="form-control">
+            <option *ngFor="let option of control.options" [value]="option">
+              {{ option }}
+            </option>
+          </select>
+        </div>
 
-          <div *ngSwitchCase="'list'" class="border rounded m-2">
-            <label>{{ control.label }}</label>
-            <div class="border rounded">
-              <dynamic-ui [form]="form" [formControlsData]="control">
-              </dynamic-ui>
-            </div>
-          </div>
-
-          <div *ngSwitchCase="'group'" class="border rounded m-1">
-            <div [formGroupName]="control.name">
-              <label>{{ control.label }}</label>
-              <dynamic-ui [form]="form" [formControlsData]="control">
-              </dynamic-ui>
-            </div>
+        <div *ngSwitchCase="'list'" class="border rounded m-2">
+          <label>{{ control.label }}</label>
+          <div class="border rounded">
+            <dynamic-ui [form]="form" [formControlsData]="control">
+            </dynamic-ui>
           </div>
         </div>
-      </ng-container>
-    </div>
-  </form>
+
+        <div *ngSwitchCase="'group'" class="border rounded m-1">
+          <div [formGroupName]="control.lable">
+            <label>{{ control.label }}</label>
+            <dynamic-ui
+            [form]="getFormGroup(form,control.name)"
+            [formControlsData]="control">
+            </dynamic-ui>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </div>
+
+<button (click)="take()">data</button>
