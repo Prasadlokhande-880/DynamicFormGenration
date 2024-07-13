@@ -1,17 +1,28 @@
 <form class="m-3">
   <div class="mb-3">
     <label for="firstName" class="form-label">First Name:</label>
-    <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
+    <input
+      type="text"
+      class="form-control"
+      id="firstName"
+      placeholder="Enter first name"
+    />
   </div>
   <div class="mb-3">
     <label for="lastName" class="form-label">Last Name:</label>
-    <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
+    <input
+      type="text"
+      class="form-control"
+      id="lastName"
+      placeholder="Enter last name"
+    />
   </div>
   <button type="submit" class="btn btn-primary">Submit temp</button>
 </form>
 
 <!-- Pass the formcontrole and from group as Input  -->
-<dynamic-ui
-[formControlsData]="formJson"
-[form]="userForm"
-></dynamic-ui>
+<div class="border border-4 border-dark rounded m-4 p-2">
+  <dynamic-ui [formControlsData]="formJson" [form]="userForm"></dynamic-ui>
+
+  <button type="button" class="btn btn-primary m-4 p-2">Submit</button>
+</div>
