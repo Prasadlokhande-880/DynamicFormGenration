@@ -2,6 +2,7 @@
   <div *ngIf="formControlsData.controls.length > 0">
     <ng-container *ngFor="let control of formControlsData.controls">
       <div [ngSwitch]="control.type">
+
         <div *ngSwitchCase="'String'" class="mb-2">
           <label for="{{ control.name }}" class="form-label">
             {{ control.label }}

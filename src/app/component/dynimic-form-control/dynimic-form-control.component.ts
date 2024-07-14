@@ -19,21 +19,21 @@ export class DynimicFormControlComponent implements OnInit, OnDestroy {
 
   formJson ={
     "type": "group",
-    "label": "Configuration",
-    "name": "Configuration",
+    "label": "Web Application Configuration",
+    "name": "WebAppConfig",
     "controls": [
       {
         "type": "Boolean",
         "label": "Activate Service",
         "name": "activateService",
-        "value": false,
+        "value": true,
         "validators": []
       },
       {
         "type": "String",
         "label": "Service Endpoint URL",
         "name": "serviceEndpoint",
-        "value": "http://example.com/api",
+        "value": "http://bookstore.example.com/api",
         "validators": ["required", "pattern:^https?://.+"]
       },
       {
@@ -47,7 +47,7 @@ export class DynimicFormControlComponent implements OnInit, OnDestroy {
         "type": "String",
         "label": "Log Directory",
         "name": "logDirectory",
-        "value": "/var/logs",
+        "value": "/var/logs/bookstore",
         "validators": []
       },
       {
@@ -66,7 +66,7 @@ export class DynimicFormControlComponent implements OnInit, OnDestroy {
             "type": "String",
             "label": "Advanced Configuration File Path",
             "name": "advancedConfigPath",
-            "value": "/etc/advanced/config.json",
+            "value": "/etc/bookstore/advanced-config.json",
             "validators": ["required"]
           },
           {
@@ -80,7 +80,7 @@ export class DynimicFormControlComponent implements OnInit, OnDestroy {
             "type": "String",
             "label": "Debug Log Directory",
             "name": "debugLogDirectory",
-            "value": "/var/logs/debug",
+            "value": "/var/logs/bookstore/debug",
             "validators": []
           },
           {
@@ -104,7 +104,7 @@ export class DynimicFormControlComponent implements OnInit, OnDestroy {
                     "type": "String",
                     "label": "Plugin Name",
                     "name": "pluginName",
-                    "value": "DefaultPlugin",
+                    "value": "InventoryPlugin",
                     "validators": ["required"]
                   },
                   {
@@ -118,10 +118,10 @@ export class DynimicFormControlComponent implements OnInit, OnDestroy {
                     "type": "String",
                     "label": "Plugin Configuration File",
                     "name": "pluginConfigFile",
-                    "value": "/etc/plugins/default.json",
+                    "value": "/etc/bookstore/plugins/inventory.json",
                     "validators": []
-                  },
-                  {
+                  }
+                  , {
                     "type": "list",
                     "label": "Plugins",
                     "name": "plugins",
@@ -142,7 +142,7 @@ export class DynimicFormControlComponent implements OnInit, OnDestroy {
                             "type": "String",
                             "label": "Plugin Name",
                             "name": "pluginName",
-                            "value": "DefaultPlugin",
+                            "value": "InventoryPlugin",
                             "validators": ["required"]
                           },
                           {
@@ -156,51 +156,8 @@ export class DynimicFormControlComponent implements OnInit, OnDestroy {
                             "type": "String",
                             "label": "Plugin Configuration File",
                             "name": "pluginConfigFile",
-                            "value": "/etc/plugins/default.json",
+                            "value": "/etc/bookstore/plugins/inventory.json",
                             "validators": []
-                          },
-                          {
-                            "type": "list",
-                            "label": "Plugins",
-                            "name": "plugins",
-                            "controls": [
-                              {
-                                "type": "group",
-                                "label": "Plugin Settings",
-                                "name": "pluginSettings",
-                                "controls": [
-                                  {
-                                    "type": "Boolean",
-                                    "label": "Enable Plugin",
-                                    "name": "enablePlugin",
-                                    "value": true,
-                                    "validators": []
-                                  },
-                                  {
-                                    "type": "String",
-                                    "label": "Plugin Name",
-                                    "name": "pluginName",
-                                    "value": "DefaultPlugin",
-                                    "validators": ["required"]
-                                  },
-                                  {
-                                    "type": "Boolean",
-                                    "label": "Plugin Debug Mode",
-                                    "name": "pluginDebugMode",
-                                    "value": false,
-                                    "validators": []
-                                  },
-                                  {
-                                    "type": "String",
-                                    "label": "Plugin Configuration File",
-                                    "name": "pluginConfigFile",
-                                    "value": "/etc/plugins/default.json",
-                                    "validators": []
-                                  },
-
-                                ]
-                              }
-                            ]
                           }
                         ]
                       }
