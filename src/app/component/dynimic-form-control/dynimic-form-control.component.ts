@@ -17,111 +17,203 @@ export class DynimicFormControlComponent implements OnInit, OnDestroy {
   firstInput: string = '';
   intervalId!: ReturnType<typeof setInterval>;
 
-  formJson = {
-    type: 'group',
-    label: 'Configuration',
-    name: 'Configuration',
-    controls: [
+  formJson ={
+    "type": "group",
+    "label": "Configuration",
+    "name": "Configuration",
+    "controls": [
       {
-        type: 'Boolean',
-        label: 'Activate Service',
-        name: 'activateService',
-        value: false,
-        validators: [],
+        "type": "Boolean",
+        "label": "Activate Service",
+        "name": "activateService",
+        "value": false,
+        "validators": []
       },
       {
-        type: 'String',
-        label: 'Service Endpoint URL',
-        name: 'serviceEndpoint',
-        value: 'http://example.com/api',
-        validators: ['required', 'pattern:^https?://.+'],
+        "type": "String",
+        "label": "Service Endpoint URL",
+        "name": "serviceEndpoint",
+        "value": "http://example.com/api",
+        "validators": ["required", "pattern:^https?://.+"]
       },
       {
-        type: 'Boolean',
-        label: 'Enable Logging',
-        name: 'enableLogging',
-        value: true,
-        validators: [],
+        "type": "Boolean",
+        "label": "Enable Logging",
+        "name": "enableLogging",
+        "value": true,
+        "validators": []
       },
       {
-        type: 'String',
-        label: 'Log Directory',
-        name: 'logDirectory',
-        value: '/var/logs',
-        validators: [],
+        "type": "String",
+        "label": "Log Directory",
+        "name": "logDirectory",
+        "value": "/var/logs",
+        "validators": []
       },
       {
-        type: 'group',
-        label: 'Advanced Settings',
-        name: 'AdvancedSettings',
-        controls: [
+        "type": "group",
+        "label": "Advanced Settings",
+        "name": "AdvancedSettings",
+        "controls": [
           {
-            type: 'Boolean',
-            label: 'Enable Advanced Mode',
-            name: 'enableAdvancedMode',
-            value: false,
-            validators: [],
+            "type": "Boolean",
+            "label": "Enable Advanced Mode",
+            "name": "enableAdvancedMode",
+            "value": false,
+            "validators": []
           },
           {
-            type: 'String',
-            label: 'Advanced Configuration File Path',
-            name: 'advancedConfigPath',
-            value: '/etc/advanced/config.json',
-            validators: ['required'],
+            "type": "String",
+            "label": "Advanced Configuration File Path",
+            "name": "advancedConfigPath",
+            "value": "/etc/advanced/config.json",
+            "validators": ["required"]
           },
           {
-            type: 'Boolean',
-            label: 'Enable Debugging',
-            name: 'enableDebugging',
-            value: true,
-            validators: [],
+            "type": "Boolean",
+            "label": "Enable Debugging",
+            "name": "enableDebugging",
+            "value": true,
+            "validators": []
           },
           {
-            type: 'String',
-            label: 'Debug Log Directory',
-            name: 'debugLogDirectory',
-            value: '/var/logs/debug',
-            validators: [],
+            "type": "String",
+            "label": "Debug Log Directory",
+            "name": "debugLogDirectory",
+            "value": "/var/logs/debug",
+            "validators": []
           },
           {
-            type: 'list',
-            label: 'Plugins',
-            name: 'plugins',
-            controls: [
+            "type": "list",
+            "label": "Plugins",
+            "name": "plugins",
+            "controls": [
               {
-                type: 'Boolean',
-                label: 'Enable Plugin',
-                name: 'enablePlugin',
-                value: true,
-                validators: [],
-              },
-              {
-                type: 'String',
-                label: 'Plugin Name',
-                name: 'pluginName',
-                value: 'DefaultPlugin',
-                validators: ['required'],
-              },
-              {
-                type: 'Boolean',
-                label: 'Plugin Debug Mode',
-                name: 'pluginDebugMode',
-                value: false,
-                validators: [],
-              },
-              {
-                type: 'String',
-                label: 'Plugin Configuration File',
-                name: 'pluginConfigFile',
-                value: '/etc/plugins/default.json',
-                validators: [],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  };
+                "type": "group",
+                "label": "Plugin Settings",
+                "name": "pluginSettings",
+                "controls": [
+                  {
+                    "type": "Boolean",
+                    "label": "Enable Plugin",
+                    "name": "enablePlugin",
+                    "value": true,
+                    "validators": []
+                  },
+                  {
+                    "type": "String",
+                    "label": "Plugin Name",
+                    "name": "pluginName",
+                    "value": "DefaultPlugin",
+                    "validators": ["required"]
+                  },
+                  {
+                    "type": "Boolean",
+                    "label": "Plugin Debug Mode",
+                    "name": "pluginDebugMode",
+                    "value": false,
+                    "validators": []
+                  },
+                  {
+                    "type": "String",
+                    "label": "Plugin Configuration File",
+                    "name": "pluginConfigFile",
+                    "value": "/etc/plugins/default.json",
+                    "validators": []
+                  },
+                  {
+                    "type": "list",
+                    "label": "Plugins",
+                    "name": "plugins",
+                    "controls": [
+                      {
+                        "type": "group",
+                        "label": "Plugin Settings",
+                        "name": "pluginSettings",
+                        "controls": [
+                          {
+                            "type": "Boolean",
+                            "label": "Enable Plugin",
+                            "name": "enablePlugin",
+                            "value": true,
+                            "validators": []
+                          },
+                          {
+                            "type": "String",
+                            "label": "Plugin Name",
+                            "name": "pluginName",
+                            "value": "DefaultPlugin",
+                            "validators": ["required"]
+                          },
+                          {
+                            "type": "Boolean",
+                            "label": "Plugin Debug Mode",
+                            "name": "pluginDebugMode",
+                            "value": false,
+                            "validators": []
+                          },
+                          {
+                            "type": "String",
+                            "label": "Plugin Configuration File",
+                            "name": "pluginConfigFile",
+                            "value": "/etc/plugins/default.json",
+                            "validators": []
+                          },
+                          {
+                            "type": "list",
+                            "label": "Plugins",
+                            "name": "plugins",
+                            "controls": [
+                              {
+                                "type": "group",
+                                "label": "Plugin Settings",
+                                "name": "pluginSettings",
+                                "controls": [
+                                  {
+                                    "type": "Boolean",
+                                    "label": "Enable Plugin",
+                                    "name": "enablePlugin",
+                                    "value": true,
+                                    "validators": []
+                                  },
+                                  {
+                                    "type": "String",
+                                    "label": "Plugin Name",
+                                    "name": "pluginName",
+                                    "value": "DefaultPlugin",
+                                    "validators": ["required"]
+                                  },
+                                  {
+                                    "type": "Boolean",
+                                    "label": "Plugin Debug Mode",
+                                    "name": "pluginDebugMode",
+                                    "value": false,
+                                    "validators": []
+                                  },
+                                  {
+                                    "type": "String",
+                                    "label": "Plugin Configuration File",
+                                    "name": "pluginConfigFile",
+                                    "value": "/etc/plugins/default.json",
+                                    "validators": []
+                                  },
+
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 
   constructor(private fb: FormBuilder) {
     this.intervalId = setInterval(() => {

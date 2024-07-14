@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'dynamic-ui',
@@ -31,6 +32,11 @@ export class DynamicUiComponent implements OnInit {
   getFormArrayAtindex(name:string,index:number,form:any):FormGroup{
     const newGroup = form.get(name);
     return newGroup.at(index) ;
+  }
+
+  RemoveGroup(index:number,form:any,name:string):void{
+    const formArray = form.get(name) as FormArray;
+    formArray.removeAt(index);
   }
 
   addList(control: any, name: string, form: FormGroup): void {

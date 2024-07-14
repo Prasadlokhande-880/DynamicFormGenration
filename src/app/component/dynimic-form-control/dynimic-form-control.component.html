@@ -1,26 +1,4 @@
-<form class="m-3">
-  <div class="mb-3">
-    <label for="firstName" class="form-label">First Name:</label>
-    <input
-      type="text"
-      class="form-control"
-      id="firstName"
-      placeholder="Enter first name"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="lastName" class="form-label">Last Name:</label>
-    <input
-      type="text"
-      class="form-control"
-      id="lastName"
-      placeholder="Enter last name"
-    />
-  </div>
-  <button type="submit" class="btn btn-primary">Submit temp</button>
-</form>
-
-<div class="border border-4 border-dark rounded m-4 p-2">
+<div class="border border-dark rounded m-4 p-2">
   <dynamic-ui
     [formControlsData]="formJson"
     [form]="userForm"
