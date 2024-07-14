@@ -1,6 +1,8 @@
-<div class="border border-dark rounded m-4 p-2">
-  <dynamic-ui
-    [formControlsData]="formJson"
-    [form]="userForm"
-  ></dynamic-ui>
+<div class="container mb-4 mt-4">
+  <div class="border border-dark rounded p-2">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <dynamic-ui [formControlsData]="formJson" [form]="userForm"></dynamic-ui>
+      <button type="submit" class="btn btn-primary mt-3" >Submit</button>
+    </form>
+  </div>
 </div>

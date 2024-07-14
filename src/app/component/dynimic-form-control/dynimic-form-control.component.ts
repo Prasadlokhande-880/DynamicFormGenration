@@ -1,10 +1,12 @@
-import { Component, ViewChild ,OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
+  ValidatorFn,
+  AbstractControl
 } from '@angular/forms';
 
 @Component({
@@ -12,180 +14,136 @@ import {
   templateUrl: './dynimic-form-control.component.html',
   styleUrls: ['./dynimic-form-control.component.css'],
 })
-export class DynimicFormControlComponent implements OnInit, OnDestroy {
+export class DynimicFormControlComponent implements OnInit {
   userForm!: FormGroup;
-  firstInput: string = '';
-  intervalId!: ReturnType<typeof setInterval>;
 
-  formJson ={
-    "type": "group",
-    "label": "Web Application Configuration",
-    "name": "WebAppConfig",
-    "controls": [
+  formJson = {
+    type: 'group',
+    label: 'Web Application Configuration',
+    name: 'WebAppConfig',
+    controls: [
       {
-        "type": "Boolean",
-        "label": "Activate Service",
-        "name": "activateService",
-        "value": true,
-        "validators": []
+        type: 'Boolean',
+        label: 'Activate Service',
+        name: 'activateService',
+        value: true,
+        validators: [],
       },
       {
-        "type": "String",
-        "label": "Service Endpoint URL",
-        "name": "serviceEndpoint",
-        "value": "http://bookstore.example.com/api",
-        "validators": ["required", "pattern:^https?://.+"]
+        type: 'String',
+        label: 'Service Endpoint URL',
+        name: 'serviceEndpoint',
+        value: 'http://bookstore.example.com/api',
+        validators: ['required', 'pattern:^https?://.+'],
       },
       {
-        "type": "Boolean",
-        "label": "Enable Logging",
-        "name": "enableLogging",
-        "value": true,
-        "validators": []
+        type: 'Boolean',
+        label: 'Enable Logging',
+        name: 'enableLogging',
+        value: true,
+        validators: [],
       },
       {
-        "type": "String",
-        "label": "Log Directory",
-        "name": "logDirectory",
-        "value": "/var/logs/bookstore",
-        "validators": []
+        type: 'String',
+        label: 'Log Directory',
+        name: 'logDirectory',
+        value: '/var/logs/bookstore',
+        validators: [],
       },
       {
-        "type": "group",
-        "label": "Advanced Settings",
-        "name": "AdvancedSettings",
-        "controls": [
+        type: 'group',
+        label: 'Advanced Settings',
+        name: 'AdvancedSettings',
+        controls: [
           {
-            "type": "Boolean",
-            "label": "Enable Advanced Mode",
-            "name": "enableAdvancedMode",
-            "value": false,
-            "validators": []
+            type: 'Boolean',
+            label: 'Enable Advanced Mode',
+            name: 'enableAdvancedMode',
+            value: false,
+            validators: [],
           },
           {
-            "type": "String",
-            "label": "Advanced Configuration File Path",
-            "name": "advancedConfigPath",
-            "value": "/etc/bookstore/advanced-config.json",
-            "validators": ["required"]
+            type: 'String',
+            label: 'Advanced Configuration File Path',
+            name: 'advancedConfigPath',
+            value: '/etc/bookstore/advanced-config.json',
+            validators: ['required'],
           },
           {
-            "type": "Boolean",
-            "label": "Enable Debugging",
-            "name": "enableDebugging",
-            "value": true,
-            "validators": []
+            type: 'Boolean',
+            label: 'Enable Debugging',
+            name: 'enableDebugging',
+            value: true,
+            validators: [],
           },
           {
-            "type": "String",
-            "label": "Debug Log Directory",
-            "name": "debugLogDirectory",
-            "value": "/var/logs/bookstore/debug",
-            "validators": []
+            type: 'String',
+            label: 'Debug Log Directory',
+            name: 'debugLogDirectory',
+            value: '/var/logs/bookstore/debug',
+            validators: [],
           },
           {
-            "type": "list",
-            "label": "Plugins",
-            "name": "plugins",
-            "controls": [
+            type: 'list',
+            label: 'Plugins',
+            name: 'plugins',
+            controls: [
               {
-                "type": "group",
-                "label": "Plugin Settings",
-                "name": "pluginSettings",
-                "controls": [
+                type: 'group',
+                label: 'Plugin Settings',
+                name: 'pluginSettings',
+                controls: [
                   {
-                    "type": "Boolean",
-                    "label": "Enable Plugin",
-                    "name": "enablePlugin",
-                    "value": true,
-                    "validators": []
+                    type: 'Boolean',
+                    label: 'Enable Plugin',
+                    name: 'enablePlugin',
+                    value: true,
+                    validators: [],
                   },
                   {
-                    "type": "String",
-                    "label": "Plugin Name",
-                    "name": "pluginName",
-                    "value": "InventoryPlugin",
-                    "validators": ["required"]
+                    type: 'String',
+                    label: 'Plugin Name',
+                    name: 'pluginName',
+                    value: 'InventoryPlugin',
+                    validators: ['required'],
                   },
                   {
-                    "type": "Boolean",
-                    "label": "Plugin Debug Mode",
-                    "name": "pluginDebugMode",
-                    "value": false,
-                    "validators": []
+                    type: 'Boolean',
+                    label: 'Plugin Debug Mode',
+                    name: 'pluginDebugMode',
+                    value: false,
+                    validators: [],
                   },
                   {
-                    "type": "String",
-                    "label": "Plugin Configuration File",
-                    "name": "pluginConfigFile",
-                    "value": "/etc/bookstore/plugins/inventory.json",
-                    "validators": []
-                  }
-                  , {
-                    "type": "list",
-                    "label": "Plugins",
-                    "name": "plugins",
-                    "controls": [
-                      {
-                        "type": "group",
-                        "label": "Plugin Settings",
-                        "name": "pluginSettings",
-                        "controls": [
-                          {
-                            "type": "Boolean",
-                            "label": "Enable Plugin",
-                            "name": "enablePlugin",
-                            "value": true,
-                            "validators": []
-                          },
-                          {
-                            "type": "String",
-                            "label": "Plugin Name",
-                            "name": "pluginName",
-                            "value": "InventoryPlugin",
-                            "validators": ["required"]
-                          },
-                          {
-                            "type": "Boolean",
-                            "label": "Plugin Debug Mode",
-                            "name": "pluginDebugMode",
-                            "value": false,
-                            "validators": []
-                          },
-                          {
-                            "type": "String",
-                            "label": "Plugin Configuration File",
-                            "name": "pluginConfigFile",
-                            "value": "/etc/bookstore/plugins/inventory.json",
-                            "validators": []
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+                    type: 'String',
+                    label: 'Plugin Configuration File',
+                    name: 'pluginConfigFile',
+                    value: '/etc/bookstore/plugins/inventory.json',
+                    validators: [],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  };
 
-  constructor(private fb: FormBuilder) {
-    this.intervalId = setInterval(() => {
-      console.log(this.userForm.value);
-    }, 5000);
-  }
-
-  ngOnDestroy() {
-    clearInterval(this.intervalId);
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.userForm = this.fb.group({});
     this.buildForm(this.formJson.controls, this.userForm);
-    console.log(this.userForm.value);
+  }
+
+  onSubmit() {
+    if (this.userForm.valid) {
+      console.log(this.userForm.value);
+    } else {
+      this.markAllAsTouched(this.userForm);
+      console.log('Form is invalid', this.userForm.errors);
+    }
   }
 
   buildForm(controls: any[], formGroup: FormGroup): void {
@@ -220,5 +178,15 @@ export class DynimicFormControlComponent implements OnInit, OnDestroy {
       });
     }
     return formValidators;
+  }
+
+  markAllAsTouched(formGroup: FormGroup): void {
+    Object.keys(formGroup.controls).forEach((controlName) => {
+      const control = formGroup.get(controlName);
+      control?.markAsTouched();
+      if (control instanceof FormGroup) {
+        this.markAllAsTouched(control);
+      }
+    });
   }
 }

@@ -13,12 +13,16 @@
             class="form-control"
             [formControlName]="control.name"
           />
+          <div *ngIf="form.get(control.name)?.touched && form.get(control.name)?.invalid" class="text-danger">
+            <div *ngIf="form.get(control.name)?.errors?.['required']">This field is required.</div>
+            <div *ngIf="form.get(control.name)?.errors?.['pattern']">Invalid format.</div>
+          </div>
         </div>
 
         <div *ngSwitchCase="'Boolean'" class="form-check mb-2">
           <label for="{{ control.name }}" class="form-check-label">
             {{ control.label }}
-           </label>
+          </label>
           <input
             id="{{ control.name }}"
             type="checkbox"
@@ -56,31 +60,29 @@
           </label>
           <button
             type="button"
-            class="btn btn-primary mb-2  mb-2 p-2 m-2"
+            class="btn btn-primary mb-2 p-2 m-2"
             (click)="addList(control.controls, control.name, form)"
           >
             <i class="bi bi-plus-circle me-2"></i>Add List
           </button>
-          <div *ngIf="checkArrayStatue">
-            <div [formArrayName]="control.name">
-              <div
-                *ngFor="let item of getFormArray(form, control.name).controls; let i = index"
-                class="mb-2"
-              >
-                <div [formGroupName]="i" class="border rounded p-2">
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-sm mb-2 p-2 m-2"
-                    (click)="RemoveGroup(i,form,control.name)"
-                  >
-                    <i class="bi bi-trash me-2"></i>Remove
-                  </button>
-                  <dynamic-ui
-                    [form]="getFormArrayAtindex(control.name, i, form)"
-                    [formControlsData]="control"
-                  >
-                  </dynamic-ui>
-                </div>
+          <div [formArrayName]="control.name">
+            <div
+              *ngFor="let item of getFormArray(form, control.name).controls; let i = index"
+              class="mb-2"
+            >
+              <div [formGroupName]="i" class="border rounded p-2">
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm mb-2 p-2 m-2"
+                  (click)="removeGroup(i, form, control.name)"
+                >
+                  <i class="bi bi-trash me-2"></i>Remove
+                </button>
+                <dynamic-ui
+                  [form]="getFormArrayAtIndex(control.name, i, form)"
+                  [formControlsData]="control"
+                >
+                </dynamic-ui>
               </div>
             </div>
           </div>
@@ -98,6 +100,7 @@
             </dynamic-ui>
           </div>
         </div>
+
       </div>
     </ng-container>
   </div>

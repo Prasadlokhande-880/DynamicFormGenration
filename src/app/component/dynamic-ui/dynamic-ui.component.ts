@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { from } from 'rxjs';
 
 @Component({
   selector: 'dynamic-ui',
@@ -10,7 +9,6 @@ import { from } from 'rxjs';
 export class DynamicUiComponent implements OnInit {
   @Input() form!: FormGroup;
   @Input() formControlsData: any;
-  checkArrayStatue: boolean = false;
 
   constructor(private fb: FormBuilder) {}
 
@@ -20,21 +18,16 @@ export class DynamicUiComponent implements OnInit {
     return form.get(name) as FormGroup;
   }
 
-  checkArray(control: any, form: FormGroup, name: string): void {
-    const formArray = form.get(name) as FormArray;
-    this.checkArrayStatue = formArray && formArray.length > 0;
-  }
-
   getFormArray(form: FormGroup, name: string): FormArray {
     return form.get(name) as FormArray;
   }
 
-  getFormArrayAtindex(name:string,index:number,form:any):FormGroup{
+  getFormArrayAtIndex(name: string, index: number, form: any): FormGroup {
     const newGroup = form.get(name);
-    return newGroup.at(index) ;
+    return newGroup.at(index);
   }
 
-  RemoveGroup(index:number,form:any,name:string):void{
+  removeGroup(index: number, form: any, name: string): void {
     const formArray = form.get(name) as FormArray;
     formArray.removeAt(index);
   }
@@ -44,7 +37,6 @@ export class DynamicUiComponent implements OnInit {
     const formArray = form.get(name) as FormArray;
     this.buildForm(control, newGroup);
     formArray.push(newGroup);
-    this.checkArray(control, form, name);
   }
 
   buildForm(controls: any[], formGroup: FormGroup): void {
