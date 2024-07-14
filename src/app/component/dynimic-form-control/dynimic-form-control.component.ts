@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild ,OnInit, OnDestroy} from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -12,9 +12,10 @@ import {
   templateUrl: './dynimic-form-control.component.html',
   styleUrls: ['./dynimic-form-control.component.css'],
 })
-export class DynimicFormControlComponent {
+export class DynimicFormControlComponent implements OnInit, OnDestroy {
   userForm!: FormGroup;
   firstInput: string = '';
+  intervalId!: ReturnType<typeof setInterval>;
 
   formJson = {
     type: 'group',
@@ -122,7 +123,15 @@ export class DynimicFormControlComponent {
     ],
   };
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    this.intervalId = setInterval(() => {
+      console.log(this.userForm.value);
+    }, 5000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+  }
 
   ngOnInit(): void {
     this.userForm = this.fb.group({});

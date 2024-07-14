@@ -50,7 +50,7 @@
                 <div [formGroupName]="i">
                   <!-- // need to send the value of ith index  -->
                   <dynamic-ui
-                    [form]="form"
+                    [form]="getFormArrayAtindex(control.name,i,form)"
                     [formControlsData]="control">
                   </dynamic-ui>
                 </div>
@@ -73,5 +73,3 @@
     </ng-container>
   </div>
 </div>
-
-<button type="button" (click)="take()">Submit</button>

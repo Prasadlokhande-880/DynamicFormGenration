@@ -15,10 +15,6 @@ export class DynamicUiComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  take(): void {
-    console.log('Submitted form data:', this.form.value);
-  }
-
   getFormGroup(form: FormGroup, name: string): FormGroup {
     return form.get(name) as FormGroup;
   }
@@ -32,12 +28,9 @@ export class DynamicUiComponent implements OnInit {
     return form.get(name) as FormArray;
   }
 
-  getFormGroupArray(form:any,i:number):string{
-    const newGroup = this.fb.group({
-      name: ""
-    });
-    console.log("getFormGroup", form.value,i);
-    return "prasad";
+  getFormArrayAtindex(name:string,index:number,form:any):FormGroup{
+    const newGroup = form.get(name);
+    return newGroup.at(index) ;
   }
 
   addList(control: any, name: string, form: FormGroup): void {
