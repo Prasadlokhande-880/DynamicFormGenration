@@ -5,7 +5,7 @@
         <div *ngSwitchCase="'String'">
           <label>{{ control.label }}</label>
           <input
-            id="control.name"
+            id="{{ control.name }}"
             type="text"
             class="form-control"
             [formControlName]="control.name"
@@ -15,7 +15,7 @@
         <div *ngSwitchCase="'Boolean'">
           <label>{{ control.label }}</label>
           <input
-            id="control.name"
+            id="{{ control.name }}"
             type="checkbox"
             class="form-check-input"
             [formControlName]="control.name"
@@ -25,7 +25,7 @@
         <div *ngSwitchCase="'Counter'">
           <label>{{ control.label }}</label>
           <input
-            id="control.name"
+            id="{{ control.name }}"
             type="number"
             class="form-control"
             [formControlName]="control.name"
@@ -34,33 +34,38 @@
 
         <div *ngSwitchCase="'select'">
           <label>{{ control.label }}</label>
-          <select id="control.name" class="form-control">
+          <select id="{{ control.name }}" class="form-control" [formControlName]="control.name">
             <option *ngFor="let option of control.options" [value]="option">
               {{ option }}
             </option>
           </select>
         </div>
 
-        <!-- Need to add the formArrayName for this  -->
         <div *ngSwitchCase="'list'" class="border rounded m-2">
-          <div [formArrayName]="control.name">
-          <label>{{ control.label }}</label>
-          <button (click)="addList(control.controls, control.name, form)">Add List</button>
-          <div class="border rounded">
-            <dynamic-ui
-            [form]="form"
-            [formControlsData]="control">
-            </dynamic-ui>
-          </div>
+            <label>{{ control.label }}</label>
+            <button type="button" (click)="addList(control.controls, control.name, form)">Add List</button>
+            <div *ngIf="checkArrayStatue">
+              <div [formArrayName]="control.name">
+              <div *ngFor="let item of getFormArray(form, control.name).controls; let i = index">
+                <div [formGroupName]="i">
+                  <!-- // need to send the value of ith index  -->
+                  <dynamic-ui
+                    [form]="form"
+                    [formControlsData]="control">
+                  </dynamic-ui>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
 
         <div *ngSwitchCase="'group'" class="border rounded m-1">
-          <div [formGroupName]="control.lable">
+          <div [formGroupName]="control.name">
             <label>{{ control.label }}</label>
             <dynamic-ui
-            [form]="getFormGroup(form,control.name)"
-            [formControlsData]="control">
+              [form]="getFormGroup(form, control.name)"
+              [formControlsData]="control">
             </dynamic-ui>
           </div>
         </div>
@@ -69,4 +74,4 @@
   </div>
 </div>
 
-<button (click)="take()">data</button>
+<button type="button" (click)="take()">Submit</button>

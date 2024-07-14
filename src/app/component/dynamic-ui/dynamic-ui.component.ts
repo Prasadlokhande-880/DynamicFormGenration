@@ -1,9 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import {
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'dynamic-ui',
@@ -13,17 +9,35 @@ import {
 export class DynamicUiComponent implements OnInit {
   @Input() form!: FormGroup;
   @Input() formControlsData: any;
+  checkArrayStatue: boolean = false;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 
   take(): void {
-    console.log('this submit', this.form.value);
+    console.log('Submitted form data:', this.form.value);
   }
 
   getFormGroup(form: FormGroup, name: string): FormGroup {
     return form.get(name) as FormGroup;
+  }
+
+  checkArray(control: any, form: FormGroup, name: string): void {
+    const formArray = form.get(name) as FormArray;
+    this.checkArrayStatue = formArray && formArray.length > 0;
+  }
+
+  getFormArray(form: FormGroup, name: string): FormArray {
+    return form.get(name) as FormArray;
+  }
+
+  getFormGroupArray(form:any,i:number):string{
+    const newGroup = this.fb.group({
+      name: ""
+    });
+    console.log("getFormGroup", form.value,i);
+    return "prasad";
   }
 
   addList(control: any, name: string, form: FormGroup): void {
@@ -31,7 +45,7 @@ export class DynamicUiComponent implements OnInit {
     const formArray = form.get(name) as FormArray;
     this.buildForm(control, newGroup);
     formArray.push(newGroup);
-    console.log('new group will be created',this.form.value);
+    this.checkArray(control, form, name);
   }
 
   buildForm(controls: any[], formGroup: FormGroup): void {
