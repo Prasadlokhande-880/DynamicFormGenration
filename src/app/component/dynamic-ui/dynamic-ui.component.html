@@ -1,39 +1,49 @@
-<div [formGroup]="form" class="m-2">
+<div [formGroup]="form" class="m-2 p-2 bg-light rounded shadow-sm">
   <div *ngIf="formControlsData.controls.length > 0">
     <ng-container *ngFor="let control of formControlsData.controls">
       <div [ngSwitch]="control.type">
-
-        <div *ngSwitchCase="'String'" class="mb-2">
-          <label for="{{ control.name }}" class="form-label">
+        <!-- String Input Field -->
+        <div *ngSwitchCase="'String'" class="mb-1">
+          <label for="{{ control.name }}" class="form-label fw-bold">
             {{ control.label }}
           </label>
           <input
-          
             id="{{ control.name }}"
             type="text"
             class="form-control"
             [formControlName]="control.name"
           />
-          <div *ngIf="form.get(control.name)?.touched && form.get(control.name)?.invalid" class="text-danger">
-            <div *ngIf="form.get(control.name)?.errors?.['required']">This field is required.</div>
-            <div *ngIf="form.get(control.name)?.errors?.['pattern']">Invalid format.</div>
+          <div
+            *ngIf="
+              form.get(control.name)?.touched && form.get(control.name)?.invalid
+            "
+            class="text-danger mt-1"
+          >
+            <div *ngIf="form.get(control.name)?.errors?.['required']">
+              This field is required.
+            </div>
+            <div *ngIf="form.get(control.name)?.errors?.['pattern']">
+              Invalid format.
+            </div>
           </div>
         </div>
 
-        <div *ngSwitchCase="'Boolean'" class="form-check mb-2">
-          <label for="{{ control.name }}" class="form-check-label">
-            {{ control.label }}
-          </label>
+        <!-- Boolean Checkbox Field -->
+        <div *ngSwitchCase="'Boolean'" class="form-check mb-1">
           <input
             id="{{ control.name }}"
             type="checkbox"
             class="form-check-input"
             [formControlName]="control.name"
           />
+          <label for="{{ control.name }}" class="form-check-label fw-bold">
+            {{ control.label }}
+          </label>
         </div>
 
-        <div *ngSwitchCase="'Counter'" class="mb-2">
-          <label for="{{ control.name }}" class="form-label">
+        <!-- Number Counter Field -->
+        <div *ngSwitchCase="'Counter'" class="mb-1">
+          <label for="{{ control.name }}" class="form-label fw-bold">
             {{ control.label }}
           </label>
           <input
@@ -44,56 +54,82 @@
           />
         </div>
 
-        <div *ngSwitchCase="'select'" class="mb-2">
-          <label for="{{ control.name }}" class="form-label">
+        <!-- Select Dropdown Field -->
+        <div *ngSwitchCase="'select'" class="mb-1">
+          <label for="{{ control.name }}" class="form-label fw-bold">
             {{ control.label }}
           </label>
-          <select id="{{ control.name }}" class="form-control" [formControlName]="control.name">
+          <select
+            id="{{ control.name }}"
+            class="form-control"
+            [formControlName]="control.name"
+          >
             <option *ngFor="let option of control.options" [value]="option">
               {{ option }}
             </option>
           </select>
         </div>
 
-        <div *ngSwitchCase="'list'" class="border rounded p-3 mb-2">
-          <label class="form-label">
-            {{ control.label }}
-          </label>
-          <button
-            type="button"
-            class="btn btn-primary mb-2 p-2 m-2"
-            (click)="addList(control.controls, control.name, form)"
-          >
-            <i class="bi bi-plus-circle me-2"></i>Add List
-          </button>
-          <div [formArrayName]="control.name">
-            <div
-              *ngFor="let item of getFormArray(form, control.name).controls; let i = index"
-              class="mb-2"
-            >
-              <div [formGroupName]="i" class="border rounded p-2">
+        <!-- List Field -->
+        <div *ngSwitchCase="'list'" class="border rounded p-1 mb-1 bg-white">
+          <div class="card bg-light mb-1">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <label class="form-label fw-bold m-0">{{ control.label }}</label>
+              <div>
                 <button
                   type="button"
-                  class="btn btn-danger btn-sm mb-2 p-2 m-2"
-                  (click)="removeGroup(i, form, control.name)"
+                  class="btn btn-primary me-1"
+                  (click)="addList(control.controls, control.name, form)"
                 >
-                  <i class="bi bi-trash me-2"></i>Remove
+                  <i class="bi bi-plus-circle me-1"></i>Add List
                 </button>
-                <dynamic-ui
-                  [form]="getFormArrayAtIndex(control.name, i, form)"
-                  [formControlsData]="control"
+                <button
+                  (click)="toggleContent()"
+                  class="btn btn-outline-secondary"
                 >
-                </dynamic-ui>
+                  <i
+                    class="bi"
+                    [ngClass]="{
+                      'bi-chevron-up': isContentVisible,
+                      'bi-chevron-down': !isContentVisible
+                    }"
+                  ></i>
+                </button>
+              </div>
+            </div>
+            <div [@slideToggle]="isContentVisible ? 'collapsed' : 'expanded'">
+              <div [formArrayName]="control.name">
+                <div
+                  *ngFor="
+                    let item of getFormArray(form, control.name).controls;
+                    let i = index
+                  "
+                  class="mb-1"
+                >
+                  <div [formGroupName]="i" class="p-1 bg-white rounded shadow-sm">
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-sm mb-1"
+                      (click)="removeGroup(i, form, control.name)"
+                    >
+                      <i class="bi bi-trash me-2"></i>Remove
+                    </button>
+                    <dynamic-ui
+                      [form]="getFormArrayAtIndex(control.name, i, form)"
+                      [formControlsData]="control"
+                    >
+                    </dynamic-ui>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div *ngSwitchCase="'group'" class="border rounded p-2 mb-2">
+        <!-- Group Field -->
+        <div *ngSwitchCase="'group'" class="border rounded p-1 mb-1 bg-white">
+          <label class="form-label fw-bold">{{ control.label }}</label>
           <div [formGroupName]="control.name">
-            <label class="form-label">
-              {{ control.label }}
-            </label>
             <dynamic-ui
               [form]="getFormGroup(form, control.name)"
               [formControlsData]="control"
@@ -101,7 +137,6 @@
             </dynamic-ui>
           </div>
         </div>
-
       </div>
     </ng-container>
   </div>

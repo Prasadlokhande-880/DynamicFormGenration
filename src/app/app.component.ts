@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'prasad';
+  isContentVisible: boolean = false;
+  buttonLabel: string = 'Show More';
+
+  toggleContent() {
+    this.isContentVisible = !this.isContentVisible;
+    this.buttonLabel = this.isContentVisible ? 'Show Less' : 'Show More';
+  }
 }

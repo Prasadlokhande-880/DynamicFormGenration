@@ -121,6 +121,90 @@ export class DynimicFormControlComponent implements OnInit {
                     value: '/etc/bookstore/plugins/inventory.json',
                     validators: [],
                   },
+                  {
+                    type: 'list',
+                    label: 'Plugins',
+                    name: 'plugins',
+                    controls: [
+                      {
+                        type: 'group',
+                        label: 'Plugin Settings',
+                        name: 'pluginSettings',
+                        controls: [
+                          {
+                            type: 'Boolean',
+                            label: 'Enable Plugin',
+                            name: 'enablePlugin',
+                            value: true,
+                            validators: [],
+                          },
+                          {
+                            type: 'String',
+                            label: 'Plugin Name',
+                            name: 'pluginName',
+                            value: 'InventoryPlugin',
+                            validators: ['required'],
+                          },
+                          {
+                            type: 'Boolean',
+                            label: 'Plugin Debug Mode',
+                            name: 'pluginDebugMode',
+                            value: false,
+                            validators: [],
+                          },
+                          {
+                            type: 'String',
+                            label: 'Plugin Configuration File',
+                            name: 'pluginConfigFile',
+                            value: '/etc/bookstore/plugins/inventory.json',
+                            validators: [],
+                          },
+                          {
+                            type: 'list',
+                            label: 'Plugins',
+                            name: 'plugins',
+                            controls: [
+                              {
+                                type: 'group',
+                                label: 'Plugin Settings',
+                                name: 'pluginSettings',
+                                controls: [
+                                  {
+                                    type: 'Boolean',
+                                    label: 'Enable Plugin',
+                                    name: 'enablePlugin',
+                                    value: true,
+                                    validators: [],
+                                  },
+                                  {
+                                    type: 'String',
+                                    label: 'Plugin Name',
+                                    name: 'pluginName',
+                                    value: 'InventoryPlugin',
+                                    validators: ['required'],
+                                  },
+                                  {
+                                    type: 'Boolean',
+                                    label: 'Plugin Debug Mode',
+                                    name: 'pluginDebugMode',
+                                    value: false,
+                                    validators: [],
+                                  },
+                                  {
+                                    type: 'String',
+                                    label: 'Plugin Configuration File',
+                                    name: 'pluginConfigFile',
+                                    value: '/etc/bookstore/plugins/inventory.json',
+                                    validators: [],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
                 ],
               },
             ],
@@ -138,12 +222,7 @@ export class DynimicFormControlComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.userForm.valid) {
       console.log(this.userForm.value);
-    } else {
-      this.markAllAsTouched(this.userForm);
-      console.log('Form is invalid', this.userForm.errors);
-    }
   }
 
   buildForm(controls: any[], formGroup: FormGroup): void {
