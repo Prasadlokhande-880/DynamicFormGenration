@@ -1,18 +1,40 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'dynamic-ui',
   templateUrl: './dynamic-ui.component.html',
   styleUrls: ['./dynamic-ui.component.css'],
+  animations: [
+    trigger('slideToggle', [
+      state('collapsed', style({
+        height: '0px',
+        opacity: 0,
+        overflow: 'hidden'
+      })),
+      state('expanded', style({
+        height: '*',
+        opacity: 1
+      })),
+      transition('collapsed <=> expanded', [
+        animate('300ms ease-in-out')
+      ])
+    ])
+  ]
 })
 export class DynamicUiComponent implements OnInit {
   @Input() form!: FormGroup;
   @Input() formControlsData: any;
+  isContentVisible = false;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
+
+  toggleContent() {
+    this.isContentVisible = !this.isContentVisible;
+  }
 
   getFormGroup(form: FormGroup, name: string): FormGroup {
     return form.get(name) as FormGroup;
@@ -22,25 +44,24 @@ export class DynamicUiComponent implements OnInit {
     return form.get(name) as FormArray;
   }
 
-  getFormArrayAtIndex(name: string, index: number, form: any): FormGroup {
-    const newGroup = form.get(name);
-    return newGroup.at(index);
+  getFormArrayAtIndex(name: string, index: number, form: FormGroup): FormGroup {
+    return this.getFormArray(form, name).at(index) as FormGroup;
   }
 
-  removeGroup(index: number, form: any, name: string): void {
-    const formArray = form.get(name) as FormArray;
+  removeGroup(index: number, form: FormGroup, name: string): void {
+    const formArray = this.getFormArray(form, name);
     formArray.removeAt(index);
   }
 
   addList(control: any, name: string, form: FormGroup): void {
     const newGroup = this.fb.group({});
-    const formArray = form.get(name) as FormArray;
+    const formArray = this.getFormArray(form, name);
     this.buildForm(control, newGroup);
     formArray.push(newGroup);
   }
 
   buildForm(controls: any[], formGroup: FormGroup): void {
-    controls.forEach((control) => {
+    controls.forEach(control => {
       if (control.type === 'group') {
         const subgroup = this.fb.group({});
         this.buildForm(control.controls, subgroup);
@@ -59,7 +80,7 @@ export class DynamicUiComponent implements OnInit {
   mapValidators(validators: string[]): any[] {
     const formValidators: any[] = [];
     if (validators) {
-      validators.forEach((validator) => {
+      validators.forEach(validator => {
         if (validator === 'required') {
           formValidators.push(Validators.required);
         } else if (validator === 'email') {
