@@ -1,9 +1,9 @@
-<div [formGroup]="form" class="m-2 p-2 bg-light rounded shadow-sm">
+<div [formGroup]="form" class="m-2 p-2 bg-light rounded">
   <div *ngIf="formControlsData.controls.length > 0">
     <ng-container *ngFor="let control of formControlsData.controls">
       <div [ngSwitch]="control.type">
         <!-- String Input Field -->
-        <div *ngSwitchCase="'String'" class="mb-1">
+        <div *ngSwitchCase="'String'" class="mb-2">
           <label for="{{ control.name }}" class="form-label fw-bold">
             {{ control.label }}
           </label>
@@ -29,7 +29,7 @@
         </div>
 
         <!-- Boolean Checkbox Field -->
-        <div *ngSwitchCase="'Boolean'" class="form-check mb-1">
+        <div *ngSwitchCase="'Boolean'" class="form-check mb-2">
           <input
             id="{{ control.name }}"
             type="checkbox"
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Number Counter Field -->
-        <div *ngSwitchCase="'Counter'" class="mb-1">
+        <div *ngSwitchCase="'Counter'" class="mb-2">
           <label for="{{ control.name }}" class="form-label fw-bold">
             {{ control.label }}
           </label>
@@ -55,7 +55,7 @@
         </div>
 
         <!-- Select Dropdown Field -->
-        <div *ngSwitchCase="'select'" class="mb-1">
+        <div *ngSwitchCase="'select'" class="mb-2">
           <label for="{{ control.name }}" class="form-label fw-bold">
             {{ control.label }}
           </label>
@@ -71,8 +71,8 @@
         </div>
 
         <!-- List Field -->
-        <div *ngSwitchCase="'list'" class="border rounded p-1 mb-1 bg-white">
-          <div class="card bg-light mb-1">
+        <div *ngSwitchCase="'list'" class="border rounded p-1 mb-2 bg-white">
+          <div class="card bg-light mb-2">
             <div class="card-header d-flex justify-content-between align-items-center">
               <label class="form-label fw-bold m-0">{{ control.label }}</label>
               <div>
@@ -106,7 +106,7 @@
                   "
                   class="mb-1"
                 >
-                  <div [formGroupName]="i" class="p-1 bg-white rounded shadow-sm">
+                  <div [formGroupName]="i" class="p-1 bg-white rounded">
                     <button
                       type="button"
                       class="btn btn-danger btn-sm mb-1"
@@ -127,7 +127,7 @@
         </div>
 
         <!-- Group Field -->
-        <div *ngSwitchCase="'group'" class="border rounded p-1 mb-1 bg-white">
+        <div *ngSwitchCase="'group'" class="border rounded p-1 mb-2 bg-white">
           <label class="form-label fw-bold">{{ control.label }}</label>
           <div [formGroupName]="control.name">
             <dynamic-ui
@@ -141,4 +141,3 @@
     </ng-container>
   </div>
 </div>
-
