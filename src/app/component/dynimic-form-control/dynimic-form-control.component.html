@@ -1,8 +1,12 @@
-<div class="container mb-4 mt-4">
+<div class="container mt-5 position-relative">
   <div class="border border-dark rounded p-2">
+    <h1 class="m-3 service-configuration-title">Service Configuration</h1>
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
       <dynamic-ui [formControlsData]="formJson" [form]="userForm"></dynamic-ui>
-      <button type="submit" class="btn btn-primary mt-3" >Submit</button>
+      <div>
+        <button type="button" class="btn btn-width btn-warning btn-shadow-hover p-2 m-2">Save</button>
+        <button type="button" class="btn btn-width btn-light me-2 btn-shadow-hover p-2">Cancel</button>
+      </div>
     </form>
   </div>
 </div>

@@ -33,10 +33,12 @@ export class DynimicFormControlComponent implements OnInit {
         type: 'String',
         label: 'Service Endpoint URL',
         name: 'serviceEndpoint',
-        value: 'http://bookstore.example.com/api',
+        value: '',
         validators: ['required', 'pattern:^https?://.+'],
       },
       {
+
+        
         type: 'Boolean',
         label: 'Enable Logging',
         name: 'enableLogging',
@@ -82,132 +84,6 @@ export class DynimicFormControlComponent implements OnInit {
             name: 'debugLogDirectory',
             value: '/var/logs/bookstore/debug',
             validators: [],
-          },
-          {
-            type: 'list',
-            label: 'Plugins',
-            name: 'plugins',
-            controls: [
-              {
-                type: 'group',
-                label: 'Plugin Settings',
-                name: 'pluginSettings',
-                controls: [
-                  {
-                    type: 'Boolean',
-                    label: 'Enable Plugin',
-                    name: 'enablePlugin',
-                    value: true,
-                    validators: [],
-                  },
-                  {
-                    type: 'String',
-                    label: 'Plugin Name',
-                    name: 'pluginName',
-                    value: 'InventoryPlugin',
-                    validators: ['required'],
-                  },
-                  {
-                    type: 'Boolean',
-                    label: 'Plugin Debug Mode',
-                    name: 'pluginDebugMode',
-                    value: false,
-                    validators: [],
-                  },
-                  {
-                    type: 'String',
-                    label: 'Plugin Configuration File',
-                    name: 'pluginConfigFile',
-                    value: '/etc/bookstore/plugins/inventory.json',
-                    validators: [],
-                  },
-                  {
-                    type: 'list',
-                    label: 'Plugins',
-                    name: 'plugins',
-                    controls: [
-                      {
-                        type: 'group',
-                        label: 'Plugin Settings',
-                        name: 'pluginSettings',
-                        controls: [
-                          {
-                            type: 'Boolean',
-                            label: 'Enable Plugin',
-                            name: 'enablePlugin',
-                            value: true,
-                            validators: [],
-                          },
-                          {
-                            type: 'String',
-                            label: 'Plugin Name',
-                            name: 'pluginName',
-                            value: 'InventoryPlugin',
-                            validators: ['required'],
-                          },
-                          {
-                            type: 'Boolean',
-                            label: 'Plugin Debug Mode',
-                            name: 'pluginDebugMode',
-                            value: false,
-                            validators: [],
-                          },
-                          {
-                            type: 'String',
-                            label: 'Plugin Configuration File',
-                            name: 'pluginConfigFile',
-                            value: '/etc/bookstore/plugins/inventory.json',
-                            validators: [],
-                          },
-                          {
-                            type: 'list',
-                            label: 'Plugins',
-                            name: 'plugins',
-                            controls: [
-                              {
-                                type: 'group',
-                                label: 'Plugin Settings',
-                                name: 'pluginSettings',
-                                controls: [
-                                  {
-                                    type: 'Boolean',
-                                    label: 'Enable Plugin',
-                                    name: 'enablePlugin',
-                                    value: true,
-                                    validators: [],
-                                  },
-                                  {
-                                    type: 'String',
-                                    label: 'Plugin Name',
-                                    name: 'pluginName',
-                                    value: 'InventoryPlugin',
-                                    validators: ['required'],
-                                  },
-                                  {
-                                    type: 'Boolean',
-                                    label: 'Plugin Debug Mode',
-                                    name: 'pluginDebugMode',
-                                    value: false,
-                                    validators: [],
-                                  },
-                                  {
-                                    type: 'String',
-                                    label: 'Plugin Configuration File',
-                                    name: 'pluginConfigFile',
-                                    value: '/etc/bookstore/plugins/inventory.json',
-                                    validators: [],
-                                  },
-                                ],
-                              },
-                            ],
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
           },
           {
             type: 'list',
