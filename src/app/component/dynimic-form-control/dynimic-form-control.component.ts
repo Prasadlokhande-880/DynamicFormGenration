@@ -1,12 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-  ValidatorFn,
-  AbstractControl
 } from '@angular/forms';
 
 @Component({
@@ -38,7 +35,7 @@ export class DynimicFormControlComponent implements OnInit {
       },
       {
 
-        
+
         type: 'Boolean',
         label: 'Enable Logging',
         name: 'enableLogging',
