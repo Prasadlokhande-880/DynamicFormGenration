@@ -37,6 +37,8 @@ export class DynimicFormControlComponent implements OnInit {
         validators: ['required', 'pattern:^https?://.+'],
       },
       {
+
+        
         type: 'Boolean',
         label: 'Enable Logging',
         name: 'enableLogging',
