@@ -1,0 +1,40 @@
+.btn-light-custom {
+  background-color: #f8f9fa;
+  border-color: #e2e6ea;
+  color: #6c757d;
+}
+
+.btn-light-custom:hover {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+}
+
+.btn-shadow-hover {
+  transition: box-shadow 0.3s ease;
+}
+
+.btn-shadow-hover:hover {
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom-input-height {
+  height: 50px;
+  max-width: 560px;
+}
+
+.custom-Checkbox-hight-width {
+  height: 20px;
+  width: 20px;
+  border-width: 2px;
+  border-color: #6c757d5b;
+}
+
+.custom-input-style {
+  border-radius: 8px;
+  border-width: 2px;
+  border-color: #6c757d5b;
+}
+
+.btn-light{
+  background-color: #c8cacba8;
+}

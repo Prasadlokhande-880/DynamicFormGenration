@@ -1,20 +1,20 @@
-<div [formGroup]="form" class="m-2 p-2 bg-light rounded">
+<div [formGroup]="form" class="p-2 rounded">
   <div *ngIf="formControlsData.controls.length > 0">
     <ng-container *ngFor="let control of formControlsData.controls">
       <div [ngSwitch]="control.type">
-
-
         <!-- String Input Field -->
-        <div *ngSwitchCase="'String'" class="mb-2">
-          <label for="{{ control.name }}" class="form-label fw-bold">
+        <div *ngSwitchCase="'String'" class="m-3">
+          <label for="{{ control.name }}" class="form-label">
             {{ control.label }}
           </label>
           <input
             id="{{ control.name }}"
             type="text"
-            class="form-control"
+            class="form-control custom-input-height custom-input-style"
             [formControlName]="control.name"
+            placeholder="{{ control.placeholder || '' }}"
           />
+
           <div
             *ngIf="
               form.get(control.name)?.touched && form.get(control.name)?.invalid
@@ -31,43 +31,44 @@
         </div>
 
         <!-- Boolean Checkbox Field -->
-        <div *ngSwitchCase="'Boolean'" class="form-check mb-2">
+        <div *ngSwitchCase="'Boolean'" class="form-check m-3">
           <input
             id="{{ control.name }}"
             type="checkbox"
-            class="form-check-input"
+            class="form-check-input custom-checkbox custom-Checkbox-hight-width"
             [formControlName]="control.name"
           />
-          <label for="{{ control.name }}" class="form-check-label fw-bold">
+          <label for="{{ control.name }}" class="form-check-label">
             {{ control.label }}
           </label>
         </div>
 
-
         <!-- Number Counter Field -->
-        <div *ngSwitchCase="'Counter'" class="mb-2">
+        <div *ngSwitchCase="'Counter'" class="m-3">
           <label for="{{ control.name }}" class="form-label fw-bold">
             {{ control.label }}
           </label>
           <input
             id="{{ control.name }}"
             type="number"
-            class="form-control"
+            class="form-control custom-input-height custom-input-style"
             [formControlName]="control.name"
+            min="{{ control.min || '' }}"
+            max="{{ control.max || '' }}"
           />
         </div>
 
-
         <!-- Select Dropdown Field -->
-        <div *ngSwitchCase="'select'" class="mb-2">
-          <label for="{{ control.name }}" class="form-label fw-bold">
+        <div *ngSwitchCase="'select'" class="m-3">
+          <label for="{{ control.name }}" class="form-label">
             {{ control.label }}
           </label>
           <select
             id="{{ control.name }}"
-            class="form-control"
+            class="form-control custom-input-height custom-input-style"
             [formControlName]="control.name"
           >
+            <option value="">Select...</option>
             <option *ngFor="let option of control.options" [value]="option">
               {{ option }}
             </option>
@@ -75,23 +76,22 @@
         </div>
 
         <!-- List Field -->
-        <div *ngSwitchCase="'list'" class="border rounded p-1 mb-2 bg-white">
-          <div class="card bg-light mb-2">
-            <div
-              class="card-header d-flex justify-content-between align-items-center"
-            >
-              <label class="form-label fw-bold m-0">{{ control.label }}</label>
+        <div *ngSwitchCase="'list'" class="rounded p-1 m-2 bg-white">
+          <div class="border rounded p-2">
+            <div class="d-flex justify-content-between align-items-center">
+              <h3>{{ control.label }}</h3>
               <div>
                 <button
                   type="button"
-                  class="btn btn-primary me-1"
+                  class="btn btn-light me-2 btn-shadow-hover p-2"
                   (click)="addList(control.controls, control.name, form)"
                 >
-                  <i class="bi bi-plus-circle me-1"></i>Add List
+                  <i class="bi bi-plus-circle me-1"></i>Add List Item
                 </button>
+
                 <button
                   (click)="toggleContent()"
-                  class="btn btn-outline-secondary"
+                  class="btn btn-outline-secondary btn-light-custom"
                 >
                   <i
                     class="bi"
@@ -112,10 +112,13 @@
                   "
                   class="mb-1"
                 >
-                  <div [formGroupName]="i" class="p-1 bg-white rounded">
+                  <div
+                    [formGroupName]="i"
+                    class="p-1 bg-white rounded border m-2 p-2"
+                  >
                     <button
                       type="button"
-                      class="btn btn-danger btn-sm mb-1"
+                      class="btn btn-warning btn-shadow-hover p-2"
                       (click)="removeGroup(i, form, control.name)"
                     >
                       <i class="bi bi-trash me-2"></i>Remove
@@ -132,11 +135,10 @@
           </div>
         </div>
 
-        
         <!-- Group Field -->
-        <div *ngSwitchCase="'group'" class="border rounded p-1 mb-2 bg-white">
-          <label class="form-label fw-bold">{{ control.label }}</label>
-          <div [formGroupName]="control.name">
+        <div *ngSwitchCase="'group'" class="rounded p-1 mb-2 bg-white">
+          <div [formGroupName]="control.name" class="mb-2">
+            <h3>{{ control.label }}</h3>
             <dynamic-ui
               [form]="getFormGroup(form, control.name)"
               [formControlsData]="control"

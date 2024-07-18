@@ -1,0 +1,38 @@
+.service-configuration-title {
+    position: absolute;
+    top: -40px;
+    left: 20px;
+    background: white;
+    padding: 0 10px;
+  }
+
+.main-backGround{
+    background-color: rgb(242,231,209);
+}
+
+.btn-light{
+  background-color: #c8cacba8;
+}
+
+.btn-light-custom {
+  background-color: #f8f9fa;
+  border-color: #e2e6ea;
+  color: #6c757d;
+}
+
+.btn-light-custom:hover {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+}
+
+.btn-shadow-hover {
+  transition: box-shadow 0.3s ease;
+}
+
+.btn-shadow-hover:hover {
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-width{
+  width: 100px;
+}
