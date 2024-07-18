@@ -2,6 +2,8 @@
   <div *ngIf="formControlsData.controls.length > 0">
     <ng-container *ngFor="let control of formControlsData.controls">
       <div [ngSwitch]="control.type">
+
+
         <!-- String Input Field -->
         <div *ngSwitchCase="'String'" class="mb-2">
           <label for="{{ control.name }}" class="form-label fw-bold">
@@ -41,6 +43,7 @@
           </label>
         </div>
 
+
         <!-- Number Counter Field -->
         <div *ngSwitchCase="'Counter'" class="mb-2">
           <label for="{{ control.name }}" class="form-label fw-bold">
@@ -53,6 +56,7 @@
             [formControlName]="control.name"
           />
         </div>
+
 
         <!-- Select Dropdown Field -->
         <div *ngSwitchCase="'select'" class="mb-2">
@@ -73,7 +77,9 @@
         <!-- List Field -->
         <div *ngSwitchCase="'list'" class="border rounded p-1 mb-2 bg-white">
           <div class="card bg-light mb-2">
-            <div class="card-header d-flex justify-content-between align-items-center">
+            <div
+              class="card-header d-flex justify-content-between align-items-center"
+            >
               <label class="form-label fw-bold m-0">{{ control.label }}</label>
               <div>
                 <button
@@ -126,6 +132,7 @@
           </div>
         </div>
 
+        
         <!-- Group Field -->
         <div *ngSwitchCase="'group'" class="border rounded p-1 mb-2 bg-white">
           <label class="form-label fw-bold">{{ control.label }}</label>
