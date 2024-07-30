@@ -40,7 +40,7 @@ export class DynimicFormControlComponent implements OnInit {
         label: 'Enable Logging',
         name: 'enableLogging',
         value: true,
-        validators: [],
+        validators: ['required'],
       },
       {
         type: 'String',
