@@ -14,18 +14,14 @@
             [formControlName]="control.name"
             placeholder="{{ control.placeholder || '' }}"
           />
-
           <div
-            *ngIf="
-              form.get(control.name)?.touched && form.get(control.name)?.invalid
-            "
+            *ngIf="form.get(control.name)?.touched && form.get(control.name)?.invalid"
             class="text-danger mt-1"
           >
-            <div *ngIf="form.get(control.name)?.errors?.['required']">
-              This field is required.
-            </div>
-            <div *ngIf="form.get(control.name)?.errors?.['pattern']">
-              Invalid format.
+            <div *ngFor="let validator of control.validators">
+              <div *ngIf="form.get(control.name)?.errors?.[validator.type]">
+                {{ validator.message }}
+              </div>
             </div>
           </div>
         </div>
@@ -53,9 +49,19 @@
             type="number"
             class="form-control custom-input-height custom-input-style"
             [formControlName]="control.name"
-            min="{{ control.min || '' }}"
-            max="{{ control.max || '' }}"
+            [min]="control.min || ''"
+            [max]="control.max || ''"
           />
+          <div
+            *ngIf="form.get(control.name)?.touched && form.get(control.name)?.invalid"
+            class="text-danger mt-1"
+          >
+            <div *ngFor="let validator of control.validators">
+              <div *ngIf="form.get(control.name)?.errors?.[validator.type]">
+                {{ validator.message }}
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Select Dropdown Field -->
@@ -73,6 +79,16 @@
               {{ option }}
             </option>
           </select>
+          <div
+            *ngIf="form.get(control.name)?.touched && form.get(control.name)?.invalid"
+            class="text-danger mt-1"
+          >
+            <div *ngFor="let validator of control.validators">
+              <div *ngIf="form.get(control.name)?.errors?.[validator.type]">
+                {{ validator.message }}
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- List Field -->
@@ -84,11 +100,10 @@
                 <button
                   type="button"
                   class="btn btn-light me-2 btn-shadow-hover p-2"
-                  (click)="addList(control.controls, control.name, form)"
+                  (click)="addList(control, control.name, form)"
                 >
                   <i class="bi bi-plus-circle me-1"></i>Add List Item
                 </button>
-
                 <button
                   (click)="toggleContent()"
                   class="btn btn-outline-secondary btn-light-custom"
@@ -103,19 +118,13 @@
                 </button>
               </div>
             </div>
-            <div [@slideToggle]="isContentVisible ? 'collapsed' : 'expanded'">
+            <div [@slideToggle]="isContentVisible ? 'expanded' : 'collapsed'">
               <div [formArrayName]="control.name">
                 <div
-                  *ngFor="
-                    let item of getFormArray(form, control.name).controls;
-                    let i = index
-                  "
+                  *ngFor="let item of getFormArray(form, control.name).controls; let i = index"
                   class="mb-1"
                 >
-                  <div
-                    [formGroupName]="i"
-                    class="p-1 bg-white rounded border m-2 p-2"
-                  >
+                  <div [formGroupName]="i" class="p-1 bg-white rounded border m-2 p-2">
                     <button
                       type="button"
                       class="btn btn-warning btn-shadow-hover p-2"
