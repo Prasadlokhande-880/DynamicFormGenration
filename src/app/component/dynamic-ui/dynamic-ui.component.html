@@ -4,17 +4,29 @@
       <div [ngSwitch]="control.type">
         <!-- String Input Field -->
         <div *ngSwitchCase="'String'" class="m-3">
-          <label for="{{ control.name }}" class="form-label">{{ control.label }}</label>
+          <label for="{{ control.name }}" class="form-label">
+            {{ control.label }}
+          </label>
           <input
             id="{{ control.name }}"
             type="text"
             class="form-control custom-input-height custom-input-style"
             [formControlName]="control.name"
-            [placeholder]="control.placeholder || ''"
+            placeholder="{{ control.placeholder || '' }}"
           />
-          <div *ngIf="form.get(control.name)?.touched && form.get(control.name)?.invalid" class="text-danger mt-1">
-            <div *ngIf="form.get(control.name)?.errors?.['required']">This field is required.</div>
-            <div *ngIf="form.get(control.name)?.errors?.['pattern']">Invalid format.</div>
+
+          <div
+            *ngIf="
+              form.get(control.name)?.touched && form.get(control.name)?.invalid
+            "
+            class="text-danger mt-1"
+          >
+            <div *ngIf="form.get(control.name)?.errors?.['required']">
+              This field is required.
+            </div>
+            <div *ngIf="form.get(control.name)?.errors?.['pattern']">
+              Invalid format.
+            </div>
           </div>
         </div>
 
@@ -23,46 +35,44 @@
           <input
             id="{{ control.name }}"
             type="checkbox"
-            class="form-check-input custom-checkbox custom-Checkbox-height-width"
+            class="form-check-input custom-checkbox custom-Checkbox-hight-width"
             [formControlName]="control.name"
           />
-          <label for="{{ control.name }}" class="form-check-label">{{ control.label }}</label>
-          <div *ngIf="form.get(control.name)?.touched && form.get(control.name)?.invalid" class="text-danger mt-1">
-            <div *ngIf="form.get(control.name)?.errors?.['required']">This field is required.</div>
-          </div>
+          <label for="{{ control.name }}" class="form-check-label">
+            {{ control.label }}
+          </label>
         </div>
 
         <!-- Number Counter Field -->
         <div *ngSwitchCase="'Counter'" class="m-3">
-          <label for="{{ control.name }}" class="form-label fw-bold">{{ control.label }}</label>
+          <label for="{{ control.name }}" class="form-label fw-bold">
+            {{ control.label }}
+          </label>
           <input
             id="{{ control.name }}"
             type="number"
             class="form-control custom-input-height custom-input-style"
             [formControlName]="control.name"
-            [min]="control.min || ''"
-            [max]="control.max || ''"
+            min="{{ control.min || '' }}"
+            max="{{ control.max || '' }}"
           />
-          <div *ngIf="form.get(control.name)?.touched && form.get(control.name)?.invalid" class="text-danger mt-1">
-            <div *ngIf="form.get(control.name)?.errors?.['required']">This field is required.</div>
-            <div *ngIf="form.get(control.name)?.errors?.['pattern']">Invalid format.</div>
-          </div>
         </div>
 
         <!-- Select Dropdown Field -->
         <div *ngSwitchCase="'select'" class="m-3">
-          <label for="{{ control.name }}" class="form-label">{{ control.label }}</label>
+          <label for="{{ control.name }}" class="form-label">
+            {{ control.label }}
+          </label>
           <select
             id="{{ control.name }}"
             class="form-control custom-input-height custom-input-style"
             [formControlName]="control.name"
           >
             <option value="">Select...</option>
-            <option *ngFor="let option of control.options" [value]="option">{{ option }}</option>
+            <option *ngFor="let option of control.options" [value]="option">
+              {{ option }}
+            </option>
           </select>
-          <div *ngIf="form.get(control.name)?.touched && form.get(control.name)?.invalid" class="text-danger mt-1">
-            <div *ngIf="form.get(control.name)?.errors?.['required']">This field is required.</div>
-          </div>
         </div>
 
         <!-- List Field -->
@@ -78,6 +88,7 @@
                 >
                   <i class="bi bi-plus-circle me-1"></i>Add List Item
                 </button>
+
                 <button
                   (click)="toggleContent()"
                   class="btn btn-outline-secondary btn-light-custom"
@@ -94,8 +105,17 @@
             </div>
             <div [@slideToggle]="isContentVisible ? 'collapsed' : 'expanded'">
               <div [formArrayName]="control.name">
-                <div *ngFor="let item of getFormArray(form, control.name).controls; let i = index" class="mb-1">
-                  <div [formGroupName]="i" class="p-1 bg-white rounded border m-2 p-2">
+                <div
+                  *ngFor="
+                    let item of getFormArray(form, control.name).controls;
+                    let i = index
+                  "
+                  class="mb-1"
+                >
+                  <div
+                    [formGroupName]="i"
+                    class="p-1 bg-white rounded border m-2 p-2"
+                  >
                     <button
                       type="button"
                       class="btn btn-warning btn-shadow-hover p-2"
@@ -103,7 +123,10 @@
                     >
                       <i class="bi bi-trash me-2"></i>Remove
                     </button>
-                    <dynamic-ui [form]="getFormArrayAtIndex(control.name, i, form)" [formControlsData]="control">
+                    <dynamic-ui
+                      [form]="getFormArrayAtIndex(control.name, i, form)"
+                      [formControlsData]="control"
+                    >
                     </dynamic-ui>
                   </div>
                 </div>
@@ -116,7 +139,10 @@
         <div *ngSwitchCase="'group'" class="rounded p-1 mb-2 bg-white">
           <div [formGroupName]="control.name" class="mb-2">
             <h3>{{ control.label }}</h3>
-            <dynamic-ui [form]="getFormGroup(form, control.name)" [formControlsData]="control">
+            <dynamic-ui
+              [form]="getFormGroup(form, control.name)"
+              [formControlsData]="control"
+            >
             </dynamic-ui>
           </div>
         </div>
