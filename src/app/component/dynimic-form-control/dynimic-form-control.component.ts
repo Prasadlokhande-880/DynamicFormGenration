@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -31,21 +31,11 @@ export class DynimicFormControlComponent implements OnInit {
         label: 'Service Endpoint URL',
         name: 'serviceEndpoint',
         value: '',
-        validators: [
-          { type: 'required', message: 'Log Directory is required' },
-          {
-            type: 'minLength',
-            length: 3,
-            message: 'Plugin Name must be at least 3 characters long',
-          },
-          {
-            type: 'maxLength',
-            length: 50,
-            message: 'Plugin Name cannot exceed 50 characters',
-          },
-        ],
+        validators: ['required', 'pattern:^https?://.+'],
       },
       {
+
+
         type: 'Boolean',
         label: 'Enable Logging',
         name: 'enableLogging',
@@ -57,14 +47,7 @@ export class DynimicFormControlComponent implements OnInit {
         label: 'Log Directory',
         name: 'logDirectory',
         value: '/var/logs/bookstore',
-        validators: [
-          { type: 'required', message: 'Log Directory is required' },
-          {
-            type: 'pattern',
-            pattern: '^/var/logs/.+',
-            message: 'Invalid directory path',
-          },
-        ],
+        validators: [],
       },
       {
         type: 'group',
@@ -83,17 +66,7 @@ export class DynimicFormControlComponent implements OnInit {
             label: 'Advanced Configuration File Path',
             name: 'advancedConfigPath',
             value: '/etc/bookstore/advanced-config.json',
-            validators: [
-              {
-                type: 'required',
-                message: 'Advanced Configuration File Path is required',
-              },
-              {
-                type: 'pattern',
-                pattern: '^/etc/bookstore/.+',
-                message: 'Invalid file path format',
-              },
-            ],
+            validators: ['required'],
           },
           {
             type: 'Boolean',
@@ -107,13 +80,7 @@ export class DynimicFormControlComponent implements OnInit {
             label: 'Debug Log Directory',
             name: 'debugLogDirectory',
             value: '/var/logs/bookstore/debug',
-            validators: [
-              {
-                type: 'pattern',
-                pattern: '^/var/logs/.+',
-                message: 'Invalid directory path',
-              },
-            ],
+            validators: [],
           },
           {
             type: 'list',
@@ -137,20 +104,7 @@ export class DynimicFormControlComponent implements OnInit {
                     label: 'Plugin Name',
                     name: 'pluginName',
                     value: 'InventoryPlugin',
-                    validators: [
-                      { type: 'required', message: 'Plugin Name is required' },
-                      {
-                        type: 'minLength',
-                        length: 3,
-                        message:
-                          'Plugin Name must be at least 3 characters long',
-                      },
-                      {
-                        type: 'maxLength',
-                        length: 50,
-                        message: 'Plugin Name cannot exceed 50 characters',
-                      },
-                    ],
+                    validators: ['required'],
                   },
                   {
                     type: 'Boolean',
@@ -164,11 +118,89 @@ export class DynimicFormControlComponent implements OnInit {
                     label: 'Plugin Configuration File',
                     name: 'pluginConfigFile',
                     value: '/etc/bookstore/plugins/inventory.json',
-                    validators: [
+                    validators: [],
+                  },
+                  {
+                    type: 'list',
+                    label: 'Plugins',
+                    name: 'plugins',
+                    controls: [
                       {
-                        type: 'pattern',
-                        pattern: '^/etc/bookstore/plugins/.+',
-                        message: 'Invalid file path format',
+                        type: 'group',
+                        label: 'Plugin Settings',
+                        name: 'pluginSettings',
+                        controls: [
+                          {
+                            type: 'Boolean',
+                            label: 'Enable Plugin',
+                            name: 'enablePlugin',
+                            value: true,
+                            validators: [],
+                          },
+                          {
+                            type: 'String',
+                            label: 'Plugin Name',
+                            name: 'pluginName',
+                            value: 'InventoryPlugin',
+                            validators: ['required'],
+                          },
+                          {
+                            type: 'Boolean',
+                            label: 'Plugin Debug Mode',
+                            name: 'pluginDebugMode',
+                            value: false,
+                            validators: [],
+                          },
+                          {
+                            type: 'String',
+                            label: 'Plugin Configuration File',
+                            name: 'pluginConfigFile',
+                            value: '/etc/bookstore/plugins/inventory.json',
+                            validators: [],
+                          },
+                          {
+                            type: 'String',
+                            label: 'Plugin Name',
+                            name: 'pluginName',
+                            value: 'InventoryPlugin',
+                            validators: ['required'],
+                          },
+                          {
+                            type: 'Boolean',
+                            label: 'Plugin Debug Mode',
+                            name: 'pluginDebugMode',
+                            value: false,
+                            validators: [],
+                          },
+                          {
+                            type: 'String',
+                            label: 'Plugin Configuration File',
+                            name: 'pluginConfigFile',
+                            value: '/etc/bookstore/plugins/inventory.json',
+                            validators: [],
+                          },
+                          {
+                            type: 'String',
+                            label: 'Plugin Name',
+                            name: 'pluginName',
+                            value: 'InventoryPlugin',
+                            validators: ['required'],
+                          },
+                          {
+                            type: 'Boolean',
+                            label: 'Plugin Debug Mode',
+                            name: 'pluginDebugMode',
+                            value: false,
+                            validators: [],
+                          },
+                          {
+                            type: 'String',
+                            label: 'Plugin Configuration File',
+                            name: 'pluginConfigFile',
+                            value: '/etc/bookstore/plugins/inventory.json',
+                            validators: [],
+                          },
+                        ],
                       },
                     ],
                   },
@@ -189,7 +221,7 @@ export class DynimicFormControlComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.userForm.value);
+      console.log(this.userForm.value);
   }
 
   buildForm(controls: any[], formGroup: FormGroup): void {
@@ -202,43 +234,28 @@ export class DynimicFormControlComponent implements OnInit {
         const formArray = this.fb.array([]);
         formGroup.addControl(control.name, formArray);
       } else {
-        const { validators } = this.mapValidators(control.validators);
+        const validators = this.mapValidators(control.validators);
         const formControl = new FormControl(control.value || '', validators);
         formGroup.addControl(control.name, formControl);
       }
     });
   }
-  mapValidators(validators: any[]): { validators: any[], messages: any[] } {
+
+  mapValidators(validators: string[]): any[] {
     const formValidators: any[] = [];
-    const messages: any[] = [];
     if (validators) {
       validators.forEach((validator) => {
-        switch (validator.type) {
-          case 'required':
-            formValidators.push(Validators.required);
-            messages.push(validator.message);
-            break;
-          case 'pattern':
-            formValidators.push(Validators.pattern(validator.pattern));
-            messages.push(validator.message);
-            break;
-          case 'minLength':
-            formValidators.push(Validators.minLength(validator.length));
-            messages.push(validator.message || `Minimum length is ${validator.length}`);
-            break;
-          case 'maxLength':
-            formValidators.push(Validators.maxLength(validator.length));
-            messages.push(validator.message || `Maximum length is ${validator.length}`);
-            break;
-          case 'custom':
-            // Assuming the custom validator is a function
-            formValidators.push(validator.validator);
-            messages.push(validator.message);
-            break;
+        if (validator === 'required') {
+          formValidators.push(Validators.required);
+        } else if (validator === 'email') {
+          formValidators.push(Validators.email);
+        } else if (validator.startsWith('pattern:')) {
+          const pattern = validator.split(':')[1];
+          formValidators.push(Validators.pattern(pattern));
         }
       });
     }
-    return { validators: formValidators, messages: messages };
+    return formValidators;
   }
 
   markAllAsTouched(formGroup: FormGroup): void {
