@@ -26,6 +26,7 @@ export class DynimicFormControlComponent implements OnInit {
         value: true,
         validators: [],
       },
+
       {
         type: 'String',
         label: 'Service Endpoint URL',
