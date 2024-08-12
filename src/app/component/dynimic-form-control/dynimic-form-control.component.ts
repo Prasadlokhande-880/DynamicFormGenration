@@ -32,7 +32,14 @@ export class DynimicFormControlComponent implements OnInit {
         label: 'Service Endpoint URL',
         name: 'serviceEndpoint',
         value: '',
-        validators: ['required', 'pattern:^https?://.+'],
+        validators: [{
+          validation:"requred",
+          message:"filde is requred"
+        },
+        {  validation:"pattern",
+            message:"filde is requred",
+            pattern:"^https?://.+"
+        }],
       },
       {
 
@@ -235,8 +242,7 @@ export class DynimicFormControlComponent implements OnInit {
         const formArray = this.fb.array([]);
         formGroup.addControl(control.name, formArray);
       } else {
-        const validators = this.mapValidators(control.validators);
-        const formControl = new FormControl(control.value || '', validators);
+        const formControl = new FormControl(control.value);
         formGroup.addControl(control.name, formControl);
       }
     });

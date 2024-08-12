@@ -70,8 +70,7 @@ export class DynamicUiComponent implements OnInit {
         const formArray = this.fb.array([]);
         formGroup.addControl(control.name, formArray);
       } else {
-        const validators = this.mapValidators(control.validators);
-        const formControl = new FormControl(control.value || '', validators);
+        const formControl = new FormControl(control.value);
         formGroup.addControl(control.name, formControl);
       }
     });
