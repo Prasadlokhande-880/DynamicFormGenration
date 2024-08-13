@@ -1,0 +1,13 @@
+<div [formGroup]="form">
+    <input
+      id="{{ control.name }}"
+      type="checkbox"
+      class="form-check-input custom-checkbox custom-Checkbox-hight-width"
+      [formControlName]="control.name"
+    />
+    <label for="{{ control.name }}" class="form-check-label">{{ control.label }}</label>
+    <!-- Validation message -->
+    <div *ngIf="form.get(control.name)?.invalid && form.get(control.name)?.touched">
+      <small>{{ getErrorMessage() }}</small>
+    </div>
+  </div>

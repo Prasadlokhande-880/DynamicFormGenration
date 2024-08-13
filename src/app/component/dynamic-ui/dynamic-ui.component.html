@@ -4,30 +4,7 @@
       <div [ngSwitch]="control.type">
         <!-- String Input Field -->
         <div *ngSwitchCase="'String'" class="m-3">
-          <label for="{{ control.name }}" class="form-label">
-            {{ control.label }}
-          </label>
-          <input
-            id="{{ control.name }}"
-            type="text"
-            class="form-control custom-input-height custom-input-style"
-            [formControlName]="control.name"
-            placeholder="{{ control.placeholder || '' }}"
-          />
-
-          <div
-            *ngIf="
-              form.get(control.name)?.touched && form.get(control.name)?.invalid
-            "
-            class="text-danger mt-1"
-          >
-            <div *ngIf="form.get(control.name)?.errors?.['required']">
-              This field is required.
-            </div>
-            <div *ngIf="form.get(control.name)?.errors?.['pattern']">
-              Invalid format.
-            </div>
-          </div>
+          <input-string [control]="control" [form]="form"></input-string>
         </div>
 
         <!-- Boolean Checkbox Field -->
@@ -38,41 +15,19 @@
             class="form-check-input custom-checkbox custom-Checkbox-hight-width"
             [formControlName]="control.name"
           />
-          <label for="{{ control.name }}" class="form-check-label">
-            {{ control.label }}
-          </label>
+          <label for="{{ control.name }}" class="form-check-label">{{
+            control.label
+          }}</label>
         </div>
 
         <!-- Number Counter Field -->
         <div *ngSwitchCase="'Counter'" class="m-3">
-          <label for="{{ control.name }}" class="form-label fw-bold">
-            {{ control.label }}
-          </label>
-          <input
-            id="{{ control.name }}"
-            type="number"
-            class="form-control custom-input-height custom-input-style"
-            [formControlName]="control.name"
-            min="{{ control.min || '' }}"
-            max="{{ control.max || '' }}"
-          />
+          <input-number [control]="control" [form]="form"></input-number>
         </div>
 
         <!-- Select Dropdown Field -->
         <div *ngSwitchCase="'select'" class="m-3">
-          <label for="{{ control.name }}" class="form-label">
-            {{ control.label }}
-          </label>
-          <select
-            id="{{ control.name }}"
-            class="form-control custom-input-height custom-input-style"
-            [formControlName]="control.name"
-          >
-            <option value="">Select...</option>
-            <option *ngFor="let option of control.options" [value]="option">
-              {{ option }}
-            </option>
-          </select>
+          <input-select [control]="control" [form]="form"></input-select>
         </div>
 
         <!-- List Field -->
@@ -88,7 +43,6 @@
                 >
                   <i class="bi bi-plus-circle me-1"></i>Add List Item
                 </button>
-
                 <button
                   (click)="toggleContent()"
                   class="btn btn-outline-secondary btn-light-custom"
@@ -126,8 +80,7 @@
                     <dynamic-ui
                       [form]="getFormArrayAtIndex(control.name, i, form)"
                       [formControlsData]="control"
-                    >
-                    </dynamic-ui>
+                    ></dynamic-ui>
                   </div>
                 </div>
               </div>
@@ -142,8 +95,7 @@
             <dynamic-ui
               [form]="getFormGroup(form, control.name)"
               [formControlsData]="control"
-            >
-            </dynamic-ui>
+            ></dynamic-ui>
           </div>
         </div>
       </div>

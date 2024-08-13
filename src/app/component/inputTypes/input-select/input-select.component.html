@@ -1,0 +1,22 @@
+<div [formGroup]="form">
+  <label for="{{ control.name }}" class="form-label">
+    {{ control.label }}
+  </label>
+  <select
+    id="{{ control.name }}"
+    class="form-select custom-input-height custom-input-style"
+    [formControlName]="control.name"
+    (blur)="form.get(control.name)?.markAsTouched()"
+  >
+    <option value="" disabled>Select {{ control.label }}</option>
+    <option *ngFor="let option of control.options" [value]="option.value">
+      {{ option.label }}
+    </option>
+  </select>
+  <!-- Validation message -->
+  <div
+    *ngIf="form.get(control.name)?.invalid && form.get(control.name)?.touched"
+  >
+    <small>{{ getErrorMessage() }}</small>
+  </div>
+</div>
