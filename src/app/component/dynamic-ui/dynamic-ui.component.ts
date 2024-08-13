@@ -75,21 +75,4 @@ export class DynamicUiComponent implements OnInit {
       }
     });
   }
-
-  mapValidators(validators: string[]): any[] {
-    const formValidators: any[] = [];
-    if (validators) {
-      validators.forEach(validator => {
-        if (validator === 'required') {
-          formValidators.push(Validators.required);
-        } else if (validator === 'email') {
-          formValidators.push(Validators.email);
-        } else if (validator.startsWith('pattern:')) {
-          const pattern = validator.split(':')[1];
-          formValidators.push(Validators.pattern(pattern));
-        }
-      });
-    }
-    return formValidators;
-  }
 }

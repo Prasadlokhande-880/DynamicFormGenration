@@ -7,12 +7,20 @@ import { AppComponent } from './app.component';
 import { DynimicFormControlComponent } from './component/dynimic-form-control/dynimic-form-control.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DynamicUiComponent } from './component/dynamic-ui/dynamic-ui.component';
+import { InputStringComponent } from './component/inputTypes/input-string/input-string.component';
+import { InputBoolenComponent } from './component/inputTypes/input-boolen/input-boolen.component';
+import { InputNumberComponent } from './component/inputTypes/input-number/input-number.component';
+import { InputSelectComponent } from './component/inputTypes/input-select/input-select.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DynimicFormControlComponent,
-    DynamicUiComponent
+    DynamicUiComponent,
+    InputStringComponent,
+    InputBoolenComponent,
+    InputNumberComponent,
+    InputSelectComponent
   ],
   imports: [
     BrowserModule,

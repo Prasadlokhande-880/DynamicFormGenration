@@ -4,7 +4,7 @@
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
       <dynamic-ui [formControlsData]="formJson" [form]="userForm"></dynamic-ui>
       <div>
-        <button type="button" onclick="functionsave" class="btn btn-width btn-warning btn-shadow-hover p-2 m-2">Save</button>
+        <button type="button" (click)="functionSave()" class="btn btn-width btn-warning btn-shadow-hover p-2 m-2">Save</button>
         <button type="button" class="btn btn-width btn-light me-2 btn-shadow-hover p-2 ">Cancel</button>
       </div>
     </form>

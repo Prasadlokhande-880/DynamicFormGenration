@@ -1,0 +1,9 @@
+small {
+    color: #d9534f;
+    font-size: 0.875rem;
+  }
+
+  input.ng-invalid.ng-touched {
+    border-color: #d9534f;
+    box-shadow: none; 
+  }
