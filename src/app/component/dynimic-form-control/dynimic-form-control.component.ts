@@ -20,6 +20,47 @@ export class DynimicFormControlComponent implements OnInit {
     "name": "WebAppConfig",
     "controls": [
       {
+        "type": "String",
+        "label": "Advanced Configuration File Path",
+        "name": "advancedConfigPath",
+        "value": "/etc/bookstore/advanced-config.json",
+        "validators": [
+          {
+            "validation": "required",
+            "message": "Advanced Configuration File Path is required"
+          },
+          {
+            "validation": "pattern",
+            "pattern": "^/[^/].+",
+            "message": "Path must be an absolute path starting with '/'"
+          }
+        ]
+      },
+      {
+        "type": "Counter",
+        "name": "age",
+        "label": "Age",
+        "placeholder": "Enter your age",
+        "min": 18,
+        "max": 65,
+        "validators": [
+          {
+            "validation": "required",
+            "message": "Age is required"
+          },
+          {
+            "validation": "min",
+            "value": 18,
+            "message": "Age must be at least 18"
+          },
+          {
+            "validation": "max",
+            "value": 65,
+            "message": "Age must be at most 65"
+          }
+        ]
+      },
+      {
         "type": "Counter",
         "name": "age",
         "label": "Age",
@@ -244,7 +285,6 @@ export class DynimicFormControlComponent implements OnInit {
       }
     ]
   }
-
 
   constructor(private fb: FormBuilder) {}
 
