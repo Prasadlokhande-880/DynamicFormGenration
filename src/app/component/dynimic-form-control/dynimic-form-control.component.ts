@@ -276,7 +276,14 @@ export class DynimicFormControlComponent implements OnInit {
                         "message": "Configuration File Path must be an absolute path starting with '/'"
                       }
                     ]
-                  }
+                  },
+                  {
+                    "type": "Boolean",
+                    "label": "Enable Advanced Mode",
+                    "name": "enableAdvancedMode",
+                    "value": false,
+                    "validators": []
+                  },
                 ]
               }
             ]
